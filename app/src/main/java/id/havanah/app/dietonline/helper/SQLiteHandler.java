@@ -2,6 +2,7 @@ package id.havanah.app.dietonline.helper;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -43,6 +44,7 @@ public class SQLiteHandler extends SQLiteOpenHelper {
     private static final String KEY_GENDER = "gender";
     private static final String KEY_WEIGHT = "weight";
     private static final String KEY_HEIGHT = "height";
+    private static final String KEY_PROHIBITION = "prohibition";
     private static final String KEY_CREATED_AT = "created_at";
     private static final String KEY_UPDATED_AT = "updated_at";
 
@@ -60,7 +62,7 @@ public class SQLiteHandler extends SQLiteOpenHelper {
                 + KEY_NAME + " TEXT," + KEY_NICKNAME + " TEXT,"
                 + KEY_ADDRESS + " TEXT," + KEY_PHONE + " TEXT,"
                 + KEY_BIRTH_DATE + " TEXT," + KEY_GENDER + " TEXT,"
-                + KEY_WEIGHT + " TEXT," + KEY_HEIGHT + " TEXT,"
+                + KEY_WEIGHT + " TEXT," + KEY_HEIGHT + " TEXT," + KEY_PROHIBITION + " TEXT,"
                 + KEY_CREATED_AT + " TEXT," + KEY_UPDATED_AT + " TEXT" + ")";
         db.execSQL(CREATE_LOGIN_TABLE);
 
@@ -80,7 +82,7 @@ public class SQLiteHandler extends SQLiteOpenHelper {
     /**
      * Storing user details in database
      */
-    public void addUser(String uid, String username, String email, String city, String subdistrict, String name, String nickname, String address, String phone, String birth_date, String gender, String created_at) {
+    public void addUser(String uid, String username, String email, String city, String subdistrict, String name, String nickname, String address, String phone, String birth_date, String gender, String created_at, String updated_at) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
@@ -96,6 +98,7 @@ public class SQLiteHandler extends SQLiteOpenHelper {
         values.put(KEY_BIRTH_DATE, birth_date); // Birth date
         values.put(KEY_GENDER, gender); // Gender
         values.put(KEY_CREATED_AT, created_at); // Created At
+        values.put(KEY_UPDATED_AT, updated_at); // Updated At
 
         // Inserting Row
         long id = db.insert(TABLE_USER, null, values);
@@ -104,7 +107,7 @@ public class SQLiteHandler extends SQLiteOpenHelper {
         Log.d(TAG, "New user inserted into sqlite: " + id);
     }
 
-    public void updateUserPersonalInfo(String name, String nickname, String city, String subdistrict, String address, String phone, String birth_date, String gender, String updated_at) {
+    public void updatePersonalInfo(String name, String nickname, String city, String subdistrict, String address, String phone, String birth_date, String gender, String updated_at) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
@@ -122,19 +125,34 @@ public class SQLiteHandler extends SQLiteOpenHelper {
         long id = db.update(TABLE_USER, values, null, null);
         db.close(); // Closing database connection
 
-        Log.d(TAG, "New user inserted into sqlite: " + id);
+        Log.d(TAG, "Update info inserted into sqlite: " + id);
+    }
+
+    public void updateAccountInfo(String username, String email, String updated_at) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put(KEY_USERNAME, username);
+        values.put(KEY_EMAIL, email);
+        values.put(KEY_UPDATED_AT, updated_at);
+        long id = db.update(TABLE_USER, values, null, null);
+        db.close();
+
+        Log.d(TAG, "Update info inserted into sqlite: " + id);
     }
 
     /*
      * User add the weight and height data
      */
-    public void addMedicalData(String username, int weight, int height) {
+    public void updateMedicalInfo(String weight, String height, String prohibition, String updated_at) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
 
-        values.put(KEY_WEIGHT, String.valueOf(weight));
-        values.put(KEY_HEIGHT, String.valueOf(height));
-        long id = db.update(TABLE_USER, values, "username = " + username, null);
+        values.put(KEY_WEIGHT, weight);
+        values.put(KEY_HEIGHT, height);
+        values.put(KEY_PROHIBITION, prohibition);
+        values.put(KEY_UPDATED_AT, updated_at);
+        long id = db.update(TABLE_USER, values, null, null);
         db.close();
         Log.d(TAG, "User weight and height inserted into sqlite: " + id);
 
@@ -166,8 +184,9 @@ public class SQLiteHandler extends SQLiteOpenHelper {
             user.put("gender", cursor.getString(11));
             user.put("weight", cursor.getString(12));
             user.put("height", cursor.getString(13));
-            user.put("created_at", cursor.getString(14));
-            user.put("updated_at", cursor.getString(15));
+            user.put("prohibition", cursor.getString(14));
+            user.put("created_at", cursor.getString(15));
+            user.put("updated_at", cursor.getString(16));
         }
         cursor.close();
         db.close();
@@ -203,5 +222,4 @@ public class SQLiteHandler extends SQLiteOpenHelper {
 
         Log.d(TAG, "Deleted all user info from sqlite");
     }
-
 }

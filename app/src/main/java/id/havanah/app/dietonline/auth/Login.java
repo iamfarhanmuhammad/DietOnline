@@ -130,12 +130,16 @@ public class Login extends AppCompatActivity {
                     String birth_date = user.getString("birth_date");
                     String gender = user.getString("gender");
                     String created_at = user.getString("created_at");
+                    String updated_at = user.getString("updated_at");
+                    String weight = user.getString("weight");
+                    String height = user.getString("height");
+                    String prohibition = user.getString("prohibition");
 
                     Toast.makeText(Login.this, "Successfully logged in, congrats!", Toast.LENGTH_SHORT).show();
 
                     // Inserting row in users table
-                    db.addUser(uid, username1, email, city, subdistrict, name, nickname, address, phone, birth_date, gender, created_at);
-
+                    db.addUser(uid, username1, email, city, subdistrict, name, nickname, address, phone, birth_date, gender, created_at, updated_at);
+                    db.updateMedicalInfo(weight, height, prohibition, updated_at);
                     // Launch main activity
                     Intent intent = new Intent(Login.this, Home.class);
                     startActivity(intent);

@@ -1,3 +1,78 @@
 <resources>
     <string name="app_name">Diet Online</string>
+    <string name="app_description">Lorem ipsum</string>
+    <string name="prompt_email">farhan@dion.com</string>
+    <string name="prompt_password">**********</string>
+    <string name="forgot_password">Forgot password</string>
+    <string name="create_account">Register</string>
+    <string name="action_sign_in">Sign in</string>
+    <string name="different_login">Or login with</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="date">Date</string>
+    <string name="month">Month</string>
+    <string name="year">Year</string>
+    <string name="greetings">Greeting</string>
+    <string name="sample_name">Farhan Muhammad</string>
+    <string name="greeting_morning">Good morning</string>
+    <string name="greeting_afternoon">Good afternoon</string>
+    <string name="greeting_evening">Good evening</string>
+    <string name="user_active_package">Your package remaining</string>
+    <string name="order">Order</string>
+    <string name="logout">Log out</string>
+    <string name="hello">Hello </string>
+    <string name="sample_nickname">Farhan</string>
+    <string name="agreement">I agree to terms and conditions</string>
+    <string name="sample_age">19 years old</string>
+    <string name="ideal">Ideal Weight</string>
+    <string name="progress">Progress</string>
+    <string name="weight">Weight</string>
+    <string name="personal_info">Personal Info</string>
+    <string name="name">Name</string>
+    <string name="nickname">Nickname</string>
+    <string name="city">City</string>
+    <string name="sample_city">Bojonegoro</string>
+    <string name="subdistrict">Sub-district</string>
+    <string name="sample_subdistrict">Sumberrejo</string>
+    <string name="address">Address</string>
+    <string name="sample_address">Jl. Aja Dulu no. 70 Desa Konohagakure</string>
+    <string name="phone">Phone</string>
+    <string name="sample_phone">089654321234</string>
+    <string name="birth_date">Birth Date</string>
+    <string name="sample_birth_date">12 Mei 2000</string>
+    <string name="gender">Gender</string>
+    <string name="account_info">Account Info</string>
+    <string name="username">Username</string>
+    <string name="sample_username">lordfarhan</string>
+    <string name="email">E-mail</string>
+    <string name="sample_email">farhan@havanah.id</string>
+    <string name="last_updated">Last Updated</string>
+    <string name="sample_date_format">12 Mei 2018</string>
+    <string name="medical_info">Medical Info</string>
+    <string name="sample_weight">70 Kg</string>
+    <string name="height">Height</string>
+    <string name="sample_height">165 Cm</string>
+    <string name="years_old">years old</string>
+    <string name="age">Age</string>
+    <string name="update">Update</string>
+    <string name="account_created">Account Created</string>
+    <string name="please_enter_your_pass_to_confirm">Please enter your password to confirm!</string>
+    <string name="confirm">Confirm</string>
+    <string name="edit">Edit</string>
+    <string name="edit_personal_info">Edit Personal Info</string>
+    <string name="edit_account_info">Edit Account Info</string>
+    <string name="edit_medical_info">Edit Medical Info</string>
+    <string name="prohibition">Prohibition</string>
+    <string name="body_mass_index">Body Mass Index</string>
+    <string name="sample_bmi">22</string>
+    <string name="sample_prohibition">Makan hati</string>
+
+    <string-array name="cities">
+        <item>Malang</item>
+        <item>Surabaya</item>
+    </string-array>
+    <string-array name="subdistrict">
+        <item>Lowokwaru</item>
+        <item>Dinoyo</item>
+    </string-array>
 </resources>
