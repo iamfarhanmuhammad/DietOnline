@@ -8,4 +8,8 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="HavanahToolbar" parent="ThemeOverlay.AppCompat.Light">
+        <item name="android:fontFamily">@font/nunito_sans_bold</item>
+    </style>
+
 </resources>

@@ -2,7 +2,6 @@ package id.havanah.app.dietonline.helper;
 
 import android.content.ContentValues;
 import android.content.Context;
-import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -47,6 +46,15 @@ public class SQLiteHandler extends SQLiteOpenHelper {
     private static final String KEY_PROHIBITION = "prohibition";
     private static final String KEY_CREATED_AT = "created_at";
     private static final String KEY_UPDATED_AT = "updated_at";
+    private static final String CREATE_LOGIN_TABLE = "CREATE TABLE " + TABLE_USER + "("
+            + KEY_ID + " INTEGER PRIMARY KEY," + KEY_UID + " TEXT,"
+            + KEY_USERNAME + " TEXT UNIQUE," + KEY_EMAIL + " TEXT UNIQUE,"
+            + KEY_CITY + " TEXT," + KEY_SUBDISTRICT + " TEXT,"
+            + KEY_NAME + " TEXT," + KEY_NICKNAME + " TEXT,"
+            + KEY_ADDRESS + " TEXT," + KEY_PHONE + " TEXT,"
+            + KEY_BIRTH_DATE + " TEXT," + KEY_GENDER + " TEXT,"
+            + KEY_WEIGHT + " TEXT," + KEY_HEIGHT + " TEXT," + KEY_PROHIBITION + " TEXT,"
+            + KEY_CREATED_AT + " TEXT," + KEY_UPDATED_AT + " TEXT" + ")";
 
     public SQLiteHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -55,15 +63,6 @@ public class SQLiteHandler extends SQLiteOpenHelper {
     // Creating Tables
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String CREATE_LOGIN_TABLE = "CREATE TABLE " + TABLE_USER + "("
-                + KEY_ID + " INTEGER PRIMARY KEY," + KEY_UID + " TEXT,"
-                + KEY_USERNAME + " TEXT UNIQUE," + KEY_EMAIL + " TEXT UNIQUE,"
-                + KEY_CITY + " TEXT," + KEY_SUBDISTRICT + " TEXT,"
-                + KEY_NAME + " TEXT," + KEY_NICKNAME + " TEXT,"
-                + KEY_ADDRESS + " TEXT," + KEY_PHONE + " TEXT,"
-                + KEY_BIRTH_DATE + " TEXT," + KEY_GENDER + " TEXT,"
-                + KEY_WEIGHT + " TEXT," + KEY_HEIGHT + " TEXT," + KEY_PROHIBITION + " TEXT,"
-                + KEY_CREATED_AT + " TEXT," + KEY_UPDATED_AT + " TEXT" + ")";
         db.execSQL(CREATE_LOGIN_TABLE);
 
         Log.d(TAG, "Database tables created");
@@ -77,6 +76,21 @@ public class SQLiteHandler extends SQLiteOpenHelper {
 
         // Create tables again
         onCreate(db);
+    }
+
+    /**
+     * Getting user status return true if rows are there in table
+     */
+    public int getRowCount(String table) {
+        String countQuery = "SELECT  * FROM " + table;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(countQuery, null);
+        int rowCount = cursor.getCount();
+        db.close();
+        cursor.close();
+
+        // return row count
+        return rowCount;
     }
 
     /**
@@ -158,7 +172,6 @@ public class SQLiteHandler extends SQLiteOpenHelper {
 
     }
 
-
     /**
      * Getting user data from database
      */
@@ -194,21 +207,6 @@ public class SQLiteHandler extends SQLiteOpenHelper {
         Log.d(TAG, "Fetching user from Sqlite: " + user.toString());
 
         return user;
-    }
-
-    /**
-     * Getting user login_view status return true if rows are there in table
-     */
-    public int getRowCount() {
-        String countQuery = "SELECT  * FROM " + TABLE_USER;
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery(countQuery, null);
-        int rowCount = cursor.getCount();
-        db.close();
-        cursor.close();
-
-        // return row count
-        return rowCount;
     }
 
     /**

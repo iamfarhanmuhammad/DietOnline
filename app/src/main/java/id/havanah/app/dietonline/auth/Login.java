@@ -2,16 +2,19 @@ package id.havanah.app.dietonline.auth;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
+
 import com.android.volley.Request;
-import com.android.volley.Response;
 import com.android.volley.toolbox.StringRequest;
 
 import org.json.JSONException;
@@ -20,11 +23,9 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import id.havanah.app.dietonline.Home;
 import id.havanah.app.dietonline.R;
-import id.havanah.app.dietonline.api.WebConfig;
+import id.havanah.app.dietonline.api.ApiService;
 import id.havanah.app.dietonline.app.AppController;
 import id.havanah.app.dietonline.helper.SQLiteHandler;
 import id.havanah.app.dietonline.helper.SessionManager;
@@ -36,8 +37,8 @@ import id.havanah.app.dietonline.helper.SessionManager;
  */
 public class Login extends AppCompatActivity {
 
-    // LogCat tag
     private static final String TAG = Login.class.getSimpleName();
+    private AnimationDrawable animationDrawable;
     private EditText inputUsername;
     private EditText inputPassword;
     private ProgressDialog progressDialog;
@@ -48,8 +49,15 @@ public class Login extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_view);
+
+        CoordinatorLayout layout = findViewById(R.id.layout_login);
+        animationDrawable = (AnimationDrawable) layout.getBackground();
+        animationDrawable.setExitFadeDuration(1000);
+        animationDrawable.setEnterFadeDuration(100);
+
         inputUsername = findViewById(R.id.input_username);
         inputPassword = findViewById(R.id.input_password);
+
         TextView linkToRegister = findViewById(R.id.btn_toRegister);
         linkToRegister.setOnClickListener(v -> {
             Intent intent = new Intent(Login.this, Register.class);
@@ -57,19 +65,14 @@ public class Login extends AppCompatActivity {
             finish();
         });
 
-        // Progress dialog
         progressDialog = new ProgressDialog(this);
         progressDialog.setCancelable(false);
 
-        // Session manager
         session = new SessionManager(getApplicationContext());
-
-        // Sqlite
         db = new SQLiteHandler(getApplicationContext());
 
         // Check if user is already logged in or not
         if (session.isLoggedIn()) {
-            // User is already logged in. Take him to main activity
             Intent intent = new Intent(Login.this, Home.class);
             startActivity(intent);
             finish();
@@ -89,6 +92,22 @@ public class Login extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "Please enter the credentials!", Toast.LENGTH_LONG).show();
             }
         });
+        TextView resetPass = findViewById(R.id.btn_toForgotPass);
+        resetPass.setOnClickListener(v -> startActivity(new Intent(this, ResetPassword.class)));
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (animationDrawable != null && !animationDrawable.isRunning())
+            animationDrawable.start();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (animationDrawable != null && animationDrawable.isRunning())
+            animationDrawable.stop();
     }
 
     /**
@@ -101,23 +120,17 @@ public class Login extends AppCompatActivity {
         progressDialog.setMessage("Logging in ...");
         showDialog();
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, WebConfig.auth, response -> {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, ApiService.login, response -> {
             Log.d(TAG, "Login Response: " + response);
             hideDialog();
-
             try {
                 JSONObject jsonObject = new JSONObject(response);
                 boolean error = jsonObject.getBoolean("error");
-
                 // Check for error node in json
                 if (!error) {
-                    // user successfully logged in
-                    // Create login_view session
                     session.setLogin(true);
 
-                    // Now store the user in SQLite
                     String uid = jsonObject.getString("uid");
-
                     JSONObject user = jsonObject.getJSONObject("user");
                     String username1 = user.getString("username");
                     String email = user.getString("email");
@@ -135,7 +148,7 @@ public class Login extends AppCompatActivity {
                     String height = user.getString("height");
                     String prohibition = user.getString("prohibition");
 
-                    Toast.makeText(Login.this, "Successfully logged in, congrats!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Login.this, getResources().getString(R.string.successfully_login), Toast.LENGTH_SHORT).show();
 
                     // Inserting row in users table
                     db.addUser(uid, username1, email, city, subdistrict, name, nickname, address, phone, birth_date, gender, created_at, updated_at);
@@ -150,7 +163,6 @@ public class Login extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), errorMsg, Toast.LENGTH_LONG).show();
                 }
             } catch (JSONException e) {
-                // JSON error
                 e.printStackTrace();
             }
 
@@ -159,20 +171,21 @@ public class Login extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
             hideDialog();
         }) {
+            @Override
+            public String getBodyContentType() {
+                return "application/x-www-form-urlencoded; charset=UTF-8";
+            }
 
             @Override
             protected Map<String, String> getParams() {
                 // Posting parameters to login_view url
-                Map<String, String> params = new HashMap<String, String>();
+                Map<String, String> params = new HashMap<>();
                 params.put("tag", "login");
                 params.put("username", username);
                 params.put("password", password);
-
                 return params;
             }
-
         };
-
         // Adding request to request queue
         AppController.getInstance().addToRequestQueue(stringRequest, tag_string_req);
     }

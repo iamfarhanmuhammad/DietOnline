@@ -1,17 +1,23 @@
 package id.havanah.app.dietonline.auth;
 
+import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.Request;
 import com.android.volley.toolbox.StringRequest;
@@ -20,17 +26,18 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.ParseException;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
+import co.ceryle.segmentedbutton.SegmentedButton;
+import co.ceryle.segmentedbutton.SegmentedButtonGroup;
+import id.havanah.app.dietonline.Profile;
 import id.havanah.app.dietonline.R;
-import id.havanah.app.dietonline.api.WebConfig;
+import id.havanah.app.dietonline.api.ApiService;
 import id.havanah.app.dietonline.app.AppController;
 import id.havanah.app.dietonline.helper.SQLiteHandler;
 import id.havanah.app.dietonline.helper.SessionManager;
-import id.havanah.app.dietonline.view.Profile;
 
 /**
  * Created by farhan at 13:32
@@ -49,11 +56,12 @@ public class UpdatePersonalInfo extends AppCompatActivity {
     private Spinner inputSubdistrict;
     private EditText inputAddress;
     private EditText inputPhone;
-    private EditText inputBirthDate;
-    private EditText inputBirthMonth;
-    private EditText inputBirthYear;
-    private RadioGroup inputGenderOption;
-    private RadioButton inputGender;
+    private EditText inputBirthDay;
+    private DatePicker datePicker;
+    private Calendar calendar;
+    private int day, month, year;
+    private String _day, _month, _year;
+    private SegmentedButtonGroup inputGender;
     private EditText inputPassword;
 
     @Override
@@ -82,18 +90,22 @@ public class UpdatePersonalInfo extends AppCompatActivity {
         inputAddress.setText(userData.getAddress());
         inputPhone = findViewById(R.id.input_phone);
         inputPhone.setText(userData.getPhone());
-        inputBirthDate = findViewById(R.id.input_birth_date);
-        inputBirthMonth = findViewById(R.id.input_birth_month);
-        inputBirthYear = findViewById(R.id.input_birth_year);
+        inputBirthDay = findViewById(R.id.input_birthday);
         try {
-            inputBirthDate.setText(userData.getDate_birth());
-            inputBirthMonth.setText(userData.getMonth_birth());
-            inputBirthYear.setText(userData.getYear_birth());
+            _day = userData.getDate_birth();
+            _month = userData.getMonth_birth();
+            _year = userData.getYear_birth();
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        inputGenderOption = findViewById(R.id.input_gender);
-
+        inputBirthDay.setText(String.format("%s/%s/%s", _day, _month, _year));
+        inputBirthDay.setOnClickListener(v -> showDialog(999));
+        inputGender = findViewById(R.id.input_gender);
+        if (userData.getGender().equalsIgnoreCase("0")) {
+            inputGender.setPosition(0);
+        } else{
+            inputGender.setPosition(1);
+        }
         Button btnUpdate = findViewById(R.id.btn_update);
         btnUpdate.setOnClickListener(v -> {
             String username = userData.getUsername();
@@ -104,14 +116,12 @@ public class UpdatePersonalInfo extends AppCompatActivity {
             String subdistrict = inputSubdistrict.getSelectedItem().toString();
             String address = inputAddress.getText().toString();
             String phone = inputPhone.getText().toString();
-            String date = inputBirthDate.getText().toString();
-            String month = inputBirthMonth.getText().toString();
-            String year = inputBirthYear.getText().toString();
-            String birth_date = month + "/" + date + "/" + year;
+            String birth_date = month + "/" + day + "/" + year;
+            String gender = String.valueOf(inputGender.getPosition());
 
-            int inputGenderId = inputGenderOption.getCheckedRadioButtonId();
-            inputGender = findViewById(inputGenderId);
-            String gender = inputGender.getText().toString();
+//            int inputGenderId = inputGenderOption.getCheckedRadioButtonId();
+//            inputGender = findViewById(inputGenderId);
+//            String gender = inputGender.getText().toString();
             if (!name.isEmpty() && !address.isEmpty() && !phone.isEmpty() && !birth_date.isEmpty() && !gender.isEmpty()) {
                 updateUser(username, password, name, nickname, city, subdistrict, address, phone, birth_date, gender);
             } else {
@@ -122,6 +132,34 @@ public class UpdatePersonalInfo extends AppCompatActivity {
         });
     }
 
+    @SuppressWarnings("deprecation")
+    public void setDate(View view) {
+        showDialog(999);
+        Toast.makeText(getApplicationContext(), "Pilih Tangal", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    protected Dialog onCreateDialog(int id) {
+        if (id == 999)
+            return new DatePickerDialog(this, myDateListener, Integer.parseInt(_year), Integer.parseInt(_month), Integer.parseInt(_day));
+        return null;
+    }
+
+    private DatePickerDialog.OnDateSetListener myDateListener = (arg0, arg1, arg2, arg3) -> {
+        showDate(arg1, arg2 + 1, arg3);
+        setBirthDay(arg1, arg2 + 1, arg3);
+    };
+
+    private void setBirthDay(int year, int month, int day) {
+        this.year = year;
+        this.month = month;
+        this.day = day;
+    }
+
+    private void showDate(int year, int month, int day) {
+        inputBirthDay.setText(new StringBuilder().append(day).append("/").append(month).append("/").append(year));
+    }
+
     private void updateUser(String username, String password, String name, String nickname, String city, String subdistrict, String address, String phone, String birth_date, String gender) {
         String tag_string_req = "req_updating";
 
@@ -129,7 +167,7 @@ public class UpdatePersonalInfo extends AppCompatActivity {
         showDialog();
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST,
-                WebConfig.auth, response -> {
+                ApiService.updatePersonal, response -> {
             Log.d(TAG, "Update Response: " + response);
             hideDialog();
             try {

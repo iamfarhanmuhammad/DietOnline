@@ -99,14 +99,4 @@
 
     </androidx.cardview.widget.CardView>
 
-    <Button
-        android:id="@+id/btn_update"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:background="@color/green_300"
-        android:text="@string/update"
-        android:textAllCaps="false"
-        android:textColor="@android:color/white" />
-
 </LinearLayout>

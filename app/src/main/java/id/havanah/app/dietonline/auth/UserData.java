@@ -16,6 +16,7 @@ import id.havanah.app.dietonline.helper.SQLiteHandler;
  * Havanah Team, ID.
  */
 public class UserData {
+    private String uid;
     private String username;
     private String email;
     private String name;
@@ -39,6 +40,10 @@ public class UserData {
 
     private SQLiteHandler db = new SQLiteHandler(AppController.getContext());
     private HashMap<String, String> user = db.getUserDetails();
+
+    public String getUid() {
+        return uid = user.get("uid");
+    }
 
     public String getUsername() {
         return username = user.get("username");

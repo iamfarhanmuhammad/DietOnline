@@ -1,32 +1,38 @@
 package id.havanah.app.dietonline.auth;
 
+import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
+
 import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
+import co.ceryle.segmentedbutton.SegmentedButtonGroup;
 import id.havanah.app.dietonline.Home;
 import id.havanah.app.dietonline.R;
-import id.havanah.app.dietonline.api.WebConfig;
+import id.havanah.app.dietonline.api.ApiService;
 import id.havanah.app.dietonline.app.AppController;
 import id.havanah.app.dietonline.helper.SessionManager;
 
@@ -38,15 +44,17 @@ import id.havanah.app.dietonline.helper.SessionManager;
 public class Register1 extends AppCompatActivity {
 
     private static final String TAG = Register.class.getSimpleName();
-    ProgressDialog progressDialog;
+    private AnimationDrawable animationDrawable;
+    private ProgressDialog progressDialog;
     private EditText inputName;
+    private EditText inputNickname;
     private EditText inputAddress;
     private EditText inputPhone;
-    private EditText inputBirthDate;
-    private EditText inputBirthMonth;
-    private EditText inputBirthYear;
-    private RadioGroup inputGenderOption;
-    private RadioButton inputGender;
+    private EditText inputBirthDay;
+    private DatePicker datePicker;
+    private Calendar calendar;
+    private int day, month, year;
+    private SegmentedButtonGroup inputGender;
     private CheckBox agreement;
 
     @Override
@@ -54,13 +62,29 @@ public class Register1 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register_view_1);
 
+        CoordinatorLayout layout = findViewById(R.id.layout_register);
+        animationDrawable = (AnimationDrawable) layout.getBackground();
+        animationDrawable.setExitFadeDuration(1000);
+        animationDrawable.setEnterFadeDuration(100);
+
+        TextView linkToLogin = findViewById(R.id.btn_toLogin);
+        linkToLogin.setOnClickListener(v -> {
+            Intent intent = new Intent(Register1.this, Login.class);
+            startActivity(intent);
+            finish();
+        });
+
+        calendar = Calendar.getInstance();
+
         inputName = findViewById(R.id.input_name);
+        inputNickname = findViewById(R.id.input_nickname);
         inputAddress = findViewById(R.id.input_address);
         inputPhone = findViewById(R.id.input_phone);
-        inputBirthDate = findViewById(R.id.input_birth_date);
-        inputBirthMonth = findViewById(R.id.input_birth_month);
-        inputBirthYear = findViewById(R.id.input_birth_year);
-        inputGenderOption = findViewById(R.id.input_gender);
+
+        inputBirthDay = findViewById(R.id.input_birthday);
+        inputBirthDay.setOnClickListener(v -> showDialog(999));
+
+        inputGender = findViewById(R.id.input_gender);
 
         agreement = findViewById(R.id.checkbox_agreement);
 
@@ -86,26 +110,49 @@ public class Register1 extends AppCompatActivity {
             String city = getIntent().getStringExtra("city");
             String subdistrict = getIntent().getStringExtra("subdistrict");
             String name = inputName.getText().toString();
+            String nickname = inputNickname.getText().toString();
             String address = inputAddress.getText().toString();
             String phone = inputPhone.getText().toString();
-            String date = inputBirthDate.getText().toString();
-            String month = inputBirthMonth.getText().toString();
-            String year = inputBirthYear.getText().toString();
-            String birth_date = month + "/" + date + "/" + year;
+            String birth_date = month + "/" + day + "/" + year;
+            String gender = String.valueOf(inputGender.getPosition());
 
-            int inputGenderId = inputGenderOption.getCheckedRadioButtonId();
-            inputGender = findViewById(inputGenderId);
-            String gender = inputGender.getText().toString();
             if (!name.isEmpty() && !address.isEmpty() && !phone.isEmpty() && !birth_date.isEmpty() && !gender.isEmpty() && agreement.isChecked()) {
-                registerUser(username, email, password, city, subdistrict, name, address, phone, birth_date, gender);
+                registerUser(username, email, password, city, subdistrict, name, nickname, address, phone, birth_date, gender);
             } else if (!agreement.isChecked()) {
-                Toast.makeText(getApplicationContext(), "Please check the agreement checkbox!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), getResources().getString(R.string.agreement_unchecked), Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(getApplicationContext(),
-                        "Please enter your details!", Toast.LENGTH_LONG)
-                        .show();
+                Toast.makeText(getApplicationContext(), "Please enter your details!", Toast.LENGTH_LONG).show();
             }
         });
+    }
+
+    @SuppressWarnings("deprecation")
+    public void setDate(View view) {
+        showDialog(999);
+        Toast.makeText(getApplicationContext(), "Pilih Tangal", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    protected Dialog onCreateDialog(int id) {
+        if (id == 999)
+            return new DatePickerDialog(this, myDateListener, 2000, 4, 12);
+        return null;
+    }
+
+    private DatePickerDialog.OnDateSetListener myDateListener = (arg0, arg1, arg2, arg3) -> {
+        showDate(arg1, arg2 + 1, arg3);
+        setBirthDay(arg1, arg2 + 1, arg3);
+    };
+
+    private void setBirthDay(int year, int month, int day) {
+        this.year = year;
+        this.month = month;
+        this.day = day;
+    }
+
+    private void showDate(int year, int month, int day) {
+        inputBirthDay.setText(new StringBuilder().append(day).append("/")
+                .append(month).append("/").append(year));
     }
 
     /**
@@ -113,18 +160,16 @@ public class Register1 extends AppCompatActivity {
      * email, password) to register url
      */
     private void registerUser(final String username, final String email, final String password, final String city, final String subdistrict,
-                              final String name, final String address, final String phone, final String birth_date, final String gender) {
+                              final String name, final String nickname, final String address, final String phone, final String birth_date, final String gender) {
         // Tag used to cancel the request
         String tag_string_req = "req_register";
 
         progressDialog.setMessage("Registering ...");
         showDialog();
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST,
-                WebConfig.auth, response -> {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, ApiService.register, response -> {
             Log.d(TAG, "Register Response: " + response);
             hideDialog();
-
             try {
                 JSONObject jObj = new JSONObject(response);
                 boolean error = jObj.getBoolean("error");
@@ -146,28 +191,28 @@ public class Register1 extends AppCompatActivity {
                 e.printStackTrace();
             }
 
-        }, new Response.ErrorListener() {
-
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.e(TAG, "Registration Error: " + error.getMessage());
-                Toast.makeText(getApplicationContext(),
-                        error.getMessage(), Toast.LENGTH_LONG).show();
-                hideDialog();
-            }
+        }, error -> {
+            Log.e(TAG, "Registration Error: " + error.getMessage());
+            Toast.makeText(getApplicationContext(),
+                    error.getMessage(), Toast.LENGTH_LONG).show();
+            hideDialog();
         }) {
+            @Override
+            public String getBodyContentType() {
+                return "application/x-www-form-urlencoded; charset=UTF-8";
+            }
 
             @Override
             protected Map<String, String> getParams() {
                 // Posting params to register url
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("tag", "register");
+                Map<String, String> params = new HashMap<>();
                 params.put("username", username);
                 params.put("email", email);
                 params.put("password", password);
                 params.put("city", city);
                 params.put("subdistrict", subdistrict);
                 params.put("name", name);
+                params.put("nickname", nickname);
                 params.put("address", address);
                 params.put("phone", phone);
                 params.put("birth_date", birth_date);
@@ -190,5 +235,19 @@ public class Register1 extends AppCompatActivity {
     private void hideDialog() {
         if (progressDialog.isShowing())
             progressDialog.dismiss();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (animationDrawable != null && !animationDrawable.isRunning())
+            animationDrawable.start();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (animationDrawable != null && animationDrawable.isRunning())
+            animationDrawable.stop();
     }
 }

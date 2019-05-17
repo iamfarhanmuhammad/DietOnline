@@ -40,7 +40,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
                             android:layout_marginStart="8dp"
-                            android:fontFamily="@font/nunito_sans_bold"
+                            android:fontFamily="@font/open_sans_regular"
                             android:text="70 Kg"
                             android:textColor="@android:color/white"
                             android:textSize="22sp" />
@@ -51,7 +51,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical|end"
                             android:layout_marginEnd="8dp"
-                            android:fontFamily="@font/nunito_sans_bold"
+                            android:fontFamily="@font/open_sans_regular"
                             android:text="165 Cm"
                             android:textColor="@android:color/white"
                             android:textSize="22sp" />
@@ -72,9 +72,11 @@
                     android:layout_width="150dp"
                     android:layout_height="150dp"
                     android:layout_gravity="center"
-                    android:src="@drawable/img_me"
+                    android:src="@drawable/ic_person_male_96px"
                     app:civ_border_color="@color/colorPrimary"
-                    app:civ_border_width="0dp" />
+                    app:civ_border_width="2dp"
+                    app:civ_circle_background_color="@android:color/white" />
+
             </LinearLayout>
 
         </androidx.cardview.widget.CardView>
@@ -133,13 +135,16 @@
             </LinearLayout>
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/cardView_bmiIndicator"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:padding="6dp"
                 app:cardBackgroundColor="@color/green"
                 app:cardCornerRadius="8dp">
 
                 <TextView
+                    android:id="@+id/textView_bmiIndicator"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="6dp"
@@ -154,12 +159,12 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
-                android:layout_marginStart="12sp"
+                android:layout_marginStart="@dimen/activity_horizontal_margin"
                 android:layout_marginTop="24dp"
-                android:layout_marginEnd="12sp"
-                app:cardBackgroundColor="@color/grey_100"
+                android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                app:cardBackgroundColor="@color/white"
                 app:cardCornerRadius="12sp"
-                app:cardElevation="0dp">
+                app:cardElevation="4dp">
 
                 <FrameLayout
                     android:layout_width="match_parent"
@@ -177,10 +182,11 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/nunito_sans_bold"
-                            android:text="Daily package"
+                            android:text="@string/your_package"
                             android:textSize="16sp" />
 
                         <TextView
+                            android:id="@+id/textView_remainingPackage"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/nunito_sans_regular"
@@ -225,7 +231,7 @@
                 android:layout_margin="16dp"
                 android:orientation="vertical"
                 app:cardCornerRadius="12dp"
-                app:cardElevation="0dp">
+                app:cardElevation="4dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"

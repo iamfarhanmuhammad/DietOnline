@@ -2,7 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="id.havanah.app.dietonline">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <application
+        android:name=".app.AppController"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -16,6 +20,31 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".auth.Login" />
+        <activity android:name=".auth.Register" />
+        <activity android:name=".Home" />
+        <activity android:name=".auth.Register1" />
+        <activity android:name=".Profile" />
+        <activity android:name=".transaction.Order" />
+        <activity android:name=".auth.UpdatePersonalInfo" />
+        <activity android:name=".auth.UpdateAccountInfo" />
+        <activity android:name=".auth.UpdateMedicalInfo" />
+        <activity android:name=".transaction.order.DailyPackageView" />
+        <activity android:name=".transaction.order.LunchPackageView" />
+        <activity android:name=".transaction.order.DailyPackageForward" />
+        <activity android:name=".transaction.order.LunchPackageForward" />
+        <activity android:name=".transaction.OrderSubmit" />
+        <activity android:name=".transaction.order.SpecificPackageForward" />
+        <activity android:name=".transaction.order.SpecificPackageView" />
+        <activity android:name=".transaction.OrderStatus" />
+        <activity android:name=".transaction.order.WeightLossPackageView" />
+        <activity android:name=".AboutDeveloper" />
+        <activity android:name=".Settings" />
+        <activity android:name=".Chat" />
+        <activity android:name=".AboutPartner" />
+        <activity android:name=".ManualBook" />
+        <activity android:name=".auth.ResetPassword" />
+        <activity android:name=".transaction.order.RecommendedPackageView" />
     </application>
 
 </manifest>

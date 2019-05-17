@@ -21,11 +21,11 @@ import java.util.Map;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import id.havanah.app.dietonline.R;
-import id.havanah.app.dietonline.api.WebConfig;
+import id.havanah.app.dietonline.api.ApiService;
 import id.havanah.app.dietonline.app.AppController;
 import id.havanah.app.dietonline.helper.SQLiteHandler;
 import id.havanah.app.dietonline.helper.SessionManager;
-import id.havanah.app.dietonline.view.Profile;
+import id.havanah.app.dietonline.Profile;
 
 /**
  * Created by farhan at 06:40
@@ -86,7 +86,7 @@ public class UpdateMedicalInfo extends AppCompatActivity {
         showDialog();
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST,
-                WebConfig.auth, response -> {
+                ApiService.updateMedical, response -> {
             Log.d(TAG, "Processing request: " + response);
             hideDialog();
 

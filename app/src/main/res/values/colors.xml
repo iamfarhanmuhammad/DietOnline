@@ -1,39 +1,150 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">@color/green</color>
+    <color name="colorPrimary">#FF99CC00</color>
     <color name="colorPrimaryDark">@color/green_600</color>
     <color name="colorAccent">#D81B60</color>
 
-    <item name="blue" type="color">#FF33B5E5</item>
-    <item name="purple" type="color">#FFAA66CC</item>
-    <item name="green" type="color">#FF99CC00</item>
-    <item name="orange" type="color">#FFFFBB33</item>
-    <item name="red" type="color">#FFFF4444</item>
-    <item name="darkblue" type="color">#FF0099CC</item>
-    <item name="darkpurple" type="color">#FF9933CC</item>
-    <item name="darkgreen" type="color">#598155</item>
-    <item name="darkorange" type="color">#FFFF8800</item>
-    <item name="darkred" type="color">#FFCC0000</item>
-    <item name="top_main_menu" type="color">#45645C</item>
-    <item name="top_main_menu30" type="color">#640d4d0e</item>
-    <item name="btn_background" type="color">#ff424242</item>
-
-    <color name="top_item">#a6c</color>
-    <color name="sticky_item">#45645C</color>
-    <color name="sticky_item_text">#fff</color>
-
-    <integer-array name="androidcolors">
-        <item>@color/blue</item>
-        <item>@color/purple</item>
-        <item>@color/green</item>
-        <item>@color/orange</item>
-        <item>@color/red</item>
-        <item>@color/darkblue</item>
-        <item>@color/darkpurple</item>
-        <item>@color/darkgreen</item>
-        <item>@color/darkorange</item>
-        <item>@color/darkred</item>
-    </integer-array>
+    <color name="white">#FFFFFF</color>
+    <color name="ivory">#FFFFF0</color>
+    <color name="light_yellow">#FFFFE0</color>
+    <color name="yellow">#FFFF00</color>
+    <color name="snow">#FFFAFA</color>
+    <color name="floral_white">#FFFAF0</color>
+    <color name="lemon_chiffon">#FFFACD</color>
+    <color name="cornsilk">#FFF8DC</color>
+    <color name="seashell">#FFF5EE</color>
+    <color name="lavender_blush">#FFF0F5</color>
+    <color name="papaya_whip">#FFEFD5</color>
+    <color name="blanched_almond">#FFEBCD</color>
+    <color name="misty_rose">#FFE4E1</color>
+    <color name="bisque">#FFE4C4</color>
+    <color name="moccasin">#FFE4B5</color>
+    <color name="navajo_white">#FFDEAD</color>
+    <color name="peach_puff">#FFDAB9</color>
+    <color name="cold">#FFD700</color>
+    <color name="pink">#FFC0CB</color>
+    <color name="light_pink">#FFB6C1</color>
+    <color name="orange">#FFA500</color>
+    <color name="light_salmon">#FFA07A</color>
+    <color name="dark_orange">#FF8C00</color>
+    <color name="coral">#FF7F50</color>
+    <color name="hot_pink">#FF69B4</color>
+    <color name="tomato">#FF6347</color>
+    <color name="orange_red">#FF4500</color>
+    <color name="deep_pink">#FF1493</color>
+    <color name="fuchsia">#FF00FF</color>
+    <color name="magenta">#FF00FF</color>
+    <color name="red">#FF0000</color>
+    <color name="old_lace">#FDF5E6</color>
+    <color name="light_goldenrod_yellow">#FAFAD2</color>
+    <color name="linen">#FAF0E6</color>
+    <color name="antique_white">#FAEBD7</color>
+    <color name="salmon">#FA8072</color>
+    <color name="ghost_white">#F8F8FF</color>
+    <color name="mint_cream">#F5FFFA</color>
+    <color name="white_smoke">#F5F5F5</color>
+    <color name="beige">#F5F5DC</color>
+    <color name="wheat">#F5DEB3</color>
+    <color name="sandy_brown">#F4A460</color>
+    <color name="azure">#F0FFFF</color>
+    <color name="honeydew">#F0FFF0</color>
+    <color name="alice_blue">#F0F8FF</color>
+    <color name="khaki">#F0E68C</color>
+    <color name="light_coral">#F08080</color>
+    <color name="pale_goldenrod">#EEE8AA</color>
+    <color name="violet">#EE82EE</color>
+    <color name="dark_salmon">#E9967A</color>
+    <color name="lavender">#E6E6FA</color>
+    <color name="light_cyan">#E0FFFF</color>
+    <color name="burlyWood">#DEB887</color>
+    <color name="plum">#DDA0DD</color>
+    <color name="gainsboro">#DCDCDC</color>
+    <color name="crimson">#DC143C</color>
+    <color name="pale_violet_red">#DB7093</color>
+    <color name="goldenrod">#DAA520</color>
+    <color name="orchid">#DA70D6</color>
+    <color name="thistle">#D8BFD8</color>
+    <color name="light_grey">#D3D3D3</color>
+    <color name="tan">#D2B48C</color>
+    <color name="chocolate">#D2691E</color>
+    <color name="peru">#CD853F</color>
+    <color name="indian_red">#CD5C5C</color>
+    <color name="medium_violet_red">#C71585</color>
+    <color name="silver">#C0C0C0</color>
+    <color name="dark_khaki">#BDB76B</color>
+    <color name="rosy_brown">#BC8F8F</color>
+    <color name="medium_orchid">#BA55D3</color>
+    <color name="dark_goldenrod">#B8860B</color>
+    <color name="fire_brick">#B22222</color>
+    <color name="powder_blue">#B0E0E6</color>
+    <color name="light_steel_blue">#B0C4DE</color>
+    <color name="pale_turquoise">#AFEEEE</color>
+    <color name="greenYellow">#ADFF2F</color>
+    <color name="light_blue">#ADD8E6</color>
+    <color name="dark_gray">#A9A9A9</color>
+    <color name="brown">#A52A2A</color>
+    <color name="sienna">#A0522D</color>
+    <color name="yellow_green">#9ACD32</color>
+    <color name="dark_orchid">#9932CC</color>
+    <color name="pale_green">#98FB98</color>
+    <color name="dark_violet">#9400D3</color>
+    <color name="mediumPurple">#9370DB</color>
+    <color name="light_green">#90EE90</color>
+    <color name="dark_sea_green">#8FBC8F</color>
+    <color name="saddle_brown">#8B4513</color>
+    <color name="dark_magenta">#8B008B</color>
+    <color name="dark_red">#8B0000</color>
+    <color name="blue_violet">#8A2BE2</color>
+    <color name="light_sky_blue">#87CEFA</color>
+    <color name="sky_blue">#87CEEB</color>
+    <color name="gray">#808080</color>
+    <color name="olive">#808000</color>
+    <color name="purple">#800080</color>
+    <color name="maroon">#800000</color>
+    <color name="aquamarine">#7FFFD4</color>
+    <color name="chartreuse">#7FFF00</color>
+    <color name="lawn_green">#7CFC00</color>
+    <color name="medium_slate_blue">#7B68EE</color>
+    <color name="light_slate_gray">#778899</color>
+    <color name="slate_gray">#708090</color>
+    <color name="olive_drab">#6B8E23</color>
+    <color name="slate_blue">#6A5ACD</color>
+    <color name="dim_gray">#696969</color>
+    <color name="medium_aquamarine">#66CDAA</color>
+    <color name="cornflower_blue">#6495ED</color>
+    <color name="cadet_blue">#5F9EA0</color>
+    <color name="dark_olive_green">#556B2F</color>
+    <color name="indigo">#4B0082</color>
+    <color name="medium_turquoise">#48D1CC</color>
+    <color name="dark_slate_blue">#483D8B</color>
+    <color name="steel_blue">#4682B4</color>
+    <color name="royal_blue">#4169E1</color>
+    <color name="turquoise">#40E0D0</color>
+    <color name="medium_sea_green">#3CB371</color>
+    <color name="lime_green">#32CD32</color>
+    <color name="dark_slate_gray">#2F4F4F</color>
+    <color name="sea_green">#2E8B57</color>
+    <color name="forest_green">#228B22</color>
+    <color name="light_sea_green">#20B2AA</color>
+    <color name="dodger_blue">#1E90FF</color>
+    <color name="midnight_blue">#191970</color>
+    <color name="aqua">#00FFFF</color>
+    <color name="cyan">#00FFFF</color>
+    <color name="spring_green">#00FF7F</color>
+    <color name="lime">#00FF00</color>
+    <color name="medium_spring_green">#00FA9A</color>
+    <color name="dark_turquoise">#00CED1</color>
+    <color name="deep_sky_blue">#00BFFF</color>
+    <color name="dark_cyan">#008B8B</color>
+    <color name="teal">#008080</color>
+    <!--<color name="green">#008000</color>-->
+    <color name="green">#FF99CC00</color>
+    <color name="dark_green">#006400</color>
+    <color name="blue">#0000FF</color>
+    <color name="medium_blue">#0000CD</color>
+    <color name="dark_blue">#00008B</color>
+    <color name="navy">#000080</color>
+    <color name="black">#000000</color>
 
     <!-- RED -->
     <color name="red_50">#fde0dc</color>
@@ -73,7 +184,6 @@
     <color name="purple_200">#cd93d8</color>
     <color name="purple_300">#ba68c8</color>
     <color name="purple_400">#ab47bc</color>
-    <color name="purple_40080">#30ab47bc</color>
     <color name="purple_500">#9c27b0</color>
     <color name="purple_600">#8e24aa</color>
     <color name="purple_700">#7b1fa2</color>
@@ -316,20 +426,19 @@
     <color name="grey_700">#616161</color>
     <color name="grey_800">#424242</color>
     <color name="grey_900">#212121</color>
-    <color name="grey_1000">#000000</color> <!-- Grey 1000 (Black) -->
+    <color name="grey_1000">#ffffff</color> <!-- Grey 1000 (Black) -->
 
     <!-- BLUE GREY -->
-    <color name="blue_grey_50">#eceff1</color>
-    <color name="blue_grey_100">#cfd8dc</color>
-    <color name="blue_grey_200">#b0bef5</color>
-    <color name="blue_grey_300">#90a4ae</color>
-    <color name="blue_grey_400">#78909c</color>
-    <color name="blue_grey_500">#607d8b</color>
-    <color name="blue_grey_600">#6546e7</color>
-    <color name="blue_grey_700">#455a64</color>
-    <color name="blue_grey_800">#37474f</color>
-    <color name="blue_grey_900">#263238</color>
-
+    <color name="blue_gray_50">#eceff1</color>
+    <color name="blue_gray_100">#cfd8dc</color>
+    <color name="blue_gray_200">#b0bef5</color>
+    <color name="blue_gray_300">#90a4ae</color>
+    <color name="blue_gray_400">#78909c</color>
+    <color name="blue_gray_500">#607d8b</color>
+    <color name="blue_gray_600">#546e7a</color>
+    <color name="blue_gray_700">#455a64</color>
+    <color name="blue_gray_800">#37474f</color>
+    <color name="blue_gray_900">#263238</color>
 
     <color name="background_material_dark">#ff212121</color>
     <color name="background_material_light">#fffafafa</color>
@@ -337,7 +446,6 @@
     <color name="ripple_material_light">#20444444</color>
     <color name="ripple_material_dark">#20ffffff</color>
 
-    <color name="button_material_dark80">#9a5a595b</color>
     <color name="button_material_dark">#ff5a595b</color>
     <color name="button_material_light">#ffd6d7d7</color>
 
@@ -351,10 +459,6 @@
     <color name="dim_foreground_disabled_material_dark">#80bebebe</color>
     <color name="dim_foreground_disabled_material_light">#80323232</color>
 
-    <color name="hint_foreground_material_dark">@color/bright_foreground_disabled_material_dark
-    </color>
-    <color name="hint_foreground_material_light">@color/bright_foreground_disabled_material_light
-    </color>
     <!-- TODO: This is 40% alpha on the default accent color. -->
     <color name="highlighted_text_material_dark">#6640c4ff</color>
     <!-- TODO: This is 40% alpha on the default accent color. -->
@@ -366,80 +470,17 @@
     <!-- Black 87% -->
     <color name="primary_text_default_material_light">#de000000</color>
     <!-- Black 54% -->
-    <color name="secondary_text_material_light">#8a000000</color>
     <!-- Black 54% (TODO: same as secondary?) -->
-    <color name="tertiary_text_material_light">#8a000000</color>
 
     <!-- White 87% -->
     <color name="primary_text_default_material_dark">#deffffff</color>
     <!-- White 38% -->
-    <color name="secondary_text_material_dark">#61ffffff</color>
     <!-- White 38% (TODO: same as secondary?) -->
-    <color name="tertiary_text_material_dark">#61ffffff</color>
 
     <!-- Primary & accent colors -->
     <eat-comment />
 
-    <color name="material_red_100">#fff4c7c3</color>
-    <color name="material_red_300">#ffe67c73</color>
-    <color name="material_red_500">#ffdb4437</color>
-    <color name="material_red_700">#ffc53929</color>
-    <color name="material_red_A200">#ffff5252</color>
-    <color name="material_red_A400">#ffff1744</color>
-
-    <color name="material_blue_100">#ffc6dafc</color>
-    <color name="material_blue_300">#ff7baaf7</color>
-    <color name="material_blue_500">#ff4285f4</color>
-    <color name="material_blue_700">#ff3367d6</color>
-    <color name="material_blue_A200">#ff448aff</color>
-    <color name="material_blue_A400">#ff2979ff</color>
-
-    <color name="material_light_blue_A200">#ff40c4ff</color>
-
-    <color name="material_teal_100">#ffb2ebf2</color>
-    <color name="material_teal_300">#ff4dd0e1</color>
-    <color name="material_teal_500">#ff00bcd4</color>
-    <color name="material_teal_700">#ff0097a7</color>
-    <color name="material_teal_A200">#ff18ffff</color>
-    <color name="material_teal_A400">#ff00e5ff</color>
-
     <!-- Accent color used by Settings -->
-    <color name="material_dark_teal_A400">#ff009688</color>
-
-    <color name="material_green_100">#ffb7e1cd</color>
-    <color name="material_green_300">#ff57bb8a</color>
-    <color name="material_green_500">#ff0f9d58</color>
-    <color name="material_green_700">#ff0b8043</color>
-    <color name="material_green_A200">#ff69f0ae</color>
-    <color name="material_green_A400">#ff00e676</color>
-
-    <color name="material_lime_100">#fff0f4c3</color>
-    <color name="material_lime_300">#ffdce775</color>
-    <color name="material_lime_500">#ffcddc39</color>
-    <color name="material_lime_700">#ffafb42b</color>
-    <color name="material_lime_A200">#ffeeff41</color>
-    <color name="material_lime_A400">#ffc6ff00</color>
-
-    <color name="material_yellow_100">#fffce8b2</color>
-    <color name="material_yellow_300">#fff7cb4d</color>
-    <color name="material_yellow_500">#fff4b400</color>
-    <color name="material_yellow_700">#fff09300</color>
-    <color name="material_yellow_A200">#ffffcd40</color>
-    <color name="material_yellow_A400">#ffffbc00</color>
-
-    <color name="material_orange_100">#ffffe0b2</color>
-    <color name="material_orange_300">#ffffb74d</color>
-    <color name="material_orange_500">#ffff9800</color>
-    <color name="material_orange_700">#fff57c00</color>
-    <color name="material_orange_A200">#ffffab40</color>
-    <color name="material_orange_A400">#ffff9100</color>
-
-    <color name="material_deep_orange_100">#fff4c7c3</color>
-    <color name="material_deep_orange_300">#ffe67c73</color>
-    <color name="material_deep_orange_500">#ffff5722</color>
-    <color name="material_deep_orange_700">#ffc53929</color>
-    <color name="material_deep_orange_A200">#ffff5252</color>
-    <color name="material_deep_orange_A400">#ffff1744</color>
 
     <!-- Neutral colors -->
     <eat-comment />
@@ -447,49 +488,23 @@
     <color name="material_grey_50">#fffafafa</color>
     <color name="material_grey_100">#fff5f5f5</color>
     <color name="material_grey_300">#ffeeeeee</color>
-    <color name="material_grey_500">#ffa3a3a3</color>
     <color name="material_grey_600">#ff757575</color>
-    <color name="material_grey_700">#ff717171</color>
     <color name="material_grey_900">#ff212121</color>
 
-    <color name="material_blue_grey_50">#ffeceff1</color>
-    <color name="material_blue_grey_100">#ffcfd8dc</color>
-    <color name="material_blue_grey_300">#ff90a4ae</color>
-    <color name="material_blue_grey_400">#ff78909c</color>
-    <color name="material_blue_grey_500">#ff607d8b</color>
-    <color name="material_blue_grey_600">#ff546e7a</color>
-    <color name="material_blue_grey_700">#ff455a64</color>
     <color name="material_blue_grey_800">#ff37474f</color>
     <!-- Primary color used by Settings -->
     <color name="material_blue_grey_900">#ff263238</color>
     <!-- Primary dark color used by Settings -->
     <color name="material_blue_grey_950">#ff21272b</color>
 
-    <color name="material_brown_100">#ffd7ccc8</color>
-    <color name="material_brown_300">#ffa1887f</color>
-    <color name="material_brown_500">#ff795548</color>
-    <color name="material_brown_700">#ff5d4037</color>
-
     <!-- Time picker defaults when no theme is set -->
     <eat-comment />
 
-    <color name="timepicker_default_background_material">
-        @color/primary_text_default_material_light
-    </color>
-    <color name="timepicker_default_disabled_color_material">
-        @color/bright_foreground_disabled_material_dark
-    </color>
-    <color name="timepicker_default_ampm_selected_background_color_material">
-        @color/material_light_blue_A200
-    </color>
-    <color name="timepicker_default_selector_color_material">@color/material_light_blue_A200</color>
-
-    <color name="list_item_title">#ffffffff</color>
-    <color name="list_background">#fff</color>
-    <color name="list_background_pressed_old">#2E962E</color>
-    <color name="list_background_pressed">#ff424242</color>
-    <color name="list_divider">#fff</color>
-    <color name="counter_text_bg">#626262</color>
-    <color name="counter_text_color">#c5c4c4</color>
     <color name="progress_background">#ff3c3a3b</color>
+
+    // Body Mass Index color
+    <color name="underweight">#00bacc</color>
+    <color name="ideal">@color/colorPrimary</color>
+    <color name="overweight">#ec8a04</color>
+    <color name="obese">#e71919</color>
 </resources>

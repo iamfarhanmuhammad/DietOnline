@@ -2,6 +2,7 @@ package id.havanah.app.dietonline.auth;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -11,6 +12,8 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
+
 import id.havanah.app.dietonline.Home;
 import id.havanah.app.dietonline.R;
 import id.havanah.app.dietonline.helper.SessionManager;
@@ -22,6 +25,7 @@ import id.havanah.app.dietonline.helper.SessionManager;
  */
 public class Register extends AppCompatActivity {
 
+    private AnimationDrawable animationDrawable;
     private EditText inputUsername;
     private EditText inputEmail;
     private EditText inputPassword;
@@ -32,6 +36,11 @@ public class Register extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register_view);
+
+        CoordinatorLayout layout = findViewById(R.id.layout_register);
+        animationDrawable = (AnimationDrawable) layout.getBackground();
+        animationDrawable.setExitFadeDuration(1000);
+        animationDrawable.setEnterFadeDuration(100);
 
         inputUsername = findViewById(R.id.input_username);
         inputEmail = findViewById(R.id.input_email);
@@ -82,5 +91,19 @@ public class Register extends AppCompatActivity {
                         .show();
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (animationDrawable != null && !animationDrawable.isRunning())
+            animationDrawable.start();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (animationDrawable != null && animationDrawable.isRunning())
+            animationDrawable.stop();
     }
 }

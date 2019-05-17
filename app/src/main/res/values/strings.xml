@@ -1,78 +1,195 @@
 <resources>
     <string name="app_name">Diet Online</string>
-    <string name="app_description">Lorem ipsum</string>
-    <string name="prompt_email">farhan@dion.com</string>
-    <string name="prompt_password">**********</string>
-    <string name="forgot_password">Forgot password</string>
-    <string name="create_account">Register</string>
-    <string name="action_sign_in">Sign in</string>
-    <string name="different_login">Or login with</string>
     <string name="male">Male</string>
     <string name="female">Female</string>
     <string name="date">Date</string>
     <string name="month">Month</string>
     <string name="year">Year</string>
     <string name="greetings">Greeting</string>
-    <string name="sample_name">Farhan Muhammad</string>
+    <string name="sample_name" translatable="false">Farhan Muhammad</string>
     <string name="greeting_morning">Good morning</string>
     <string name="greeting_afternoon">Good afternoon</string>
     <string name="greeting_evening">Good evening</string>
     <string name="user_active_package">Your package remaining</string>
-    <string name="order">Order</string>
+    <string name="order_status">Order status</string>
     <string name="logout">Log out</string>
     <string name="hello">Hello </string>
-    <string name="sample_nickname">Farhan</string>
+    <string name="sample_nickname" translatable="false">Farhan</string>
     <string name="agreement">I agree to terms and conditions</string>
     <string name="sample_age">19 years old</string>
-    <string name="ideal">Ideal Weight</string>
-    <string name="progress">Progress</string>
     <string name="weight">Weight</string>
     <string name="personal_info">Personal Info</string>
     <string name="name">Name</string>
     <string name="nickname">Nickname</string>
     <string name="city">City</string>
-    <string name="sample_city">Bojonegoro</string>
+    <string name="sample_city" translatable="false">Bojonegoro</string>
     <string name="subdistrict">Sub-district</string>
-    <string name="sample_subdistrict">Sumberrejo</string>
+    <string name="sample_subdistrict" translatable="false">Sumberrejo</string>
     <string name="address">Address</string>
-    <string name="sample_address">Jl. Aja Dulu no. 70 Desa Konohagakure</string>
+    <string name="sample_address" translatable="false">Jl. Aja Dulu no. 70 Desa Konohagakure</string>
     <string name="phone">Phone</string>
-    <string name="sample_phone">089654321234</string>
+    <string name="sample_phone" translatable="false">089654321234</string>
     <string name="birth_date">Birth Date</string>
-    <string name="sample_birth_date">12 Mei 2000</string>
+    <string name="sample_birth_date" translatable="false">12 Mei 2000</string>
     <string name="gender">Gender</string>
     <string name="account_info">Account Info</string>
     <string name="username">Username</string>
-    <string name="sample_username">lordfarhan</string>
+    <string name="sample_username" translatable="false">lordfarhan</string>
     <string name="email">E-mail</string>
-    <string name="sample_email">farhan@havanah.id</string>
+    <string name="sample_email" translatable="false">farhan@havanah.id</string>
     <string name="last_updated">Last Updated</string>
-    <string name="sample_date_format">12 Mei 2018</string>
+    <string name="sample_date_format" translatable="false">12 Mei 2018</string>
     <string name="medical_info">Medical Info</string>
-    <string name="sample_weight">70 Kg</string>
+    <string name="sample_weight" translatable="false">70 Kg</string>
     <string name="height">Height</string>
-    <string name="sample_height">165 Cm</string>
+    <string name="sample_height" translatable="false">165 Cm</string>
     <string name="years_old">years old</string>
     <string name="age">Age</string>
     <string name="update">Update</string>
     <string name="account_created">Account Created</string>
     <string name="please_enter_your_pass_to_confirm">Please enter your password to confirm!</string>
-    <string name="confirm">Confirm</string>
     <string name="edit">Edit</string>
     <string name="edit_personal_info">Edit Personal Info</string>
     <string name="edit_account_info">Edit Account Info</string>
     <string name="edit_medical_info">Edit Medical Info</string>
     <string name="prohibition">Prohibition</string>
     <string name="body_mass_index">Body Mass Index</string>
-    <string name="sample_bmi">22</string>
-    <string name="sample_prohibition">Makan hati</string>
+    <string name="sample_bmi" translatable="false">22</string>
+    <string name="sample_prohibition" translatable="false">Makan hati</string>
+    <string name="manual_book">Manual Book</string>
+    <string name="make_a_plan">Make a Plan</string>
+    <string name="about_partner">Partner</string>
+    <string name="settings">Settings</string>
+    <string name="chat">Chat</string>
+    <string name="underweight">Underweight</string>
+    <string name="ideal">Ideal</string>
+    <string name="overweight">Overweight</string>
+    <string name="obese">Obese</string>
+    <string name="item">Item</string>
+    <string name="package_daily" translatable="false">Katering Harian</string>
+    <string name="package_daily_description" translatable="false">Layanan Katering Makanan sehat harian (non-diet) yang tidak menggunakan pengawet ataupun penyedap, dan menggunakan bahan makanan segar dan alami, serta mengacu pada pedoman gizi seimbang. Minimal pemesanan 5x pengiriman.</string>
+    <string name="package_lunch" translatable="false">Single Lunch Box</string>
+    <string name="package_lunch_description" translatable="false">Layanan katering makanan siang sehat yang dapat dikirim ke tempat kerja, sekolah ataupun kampus. Dikemas dalam mika bento sekali pakai. Hanya melayani pengiriman siang dari hari senin-jumat. Tidak menggunakan penyedap maupun pengawet makanan.</string>
+    <string name="package_specific" translatable="false">Katering Khusus</string>
+    <string name="package_specific_description" translatable="false">-</string>
+    <string name="package_weight_loss" translatable="false">Weight Loss Diet</string>
+    <string name="package_weight_loss_description" translatable="false">Layanan catering untuk menurunkan berat badan dengan menggunakan konsep Diet Mayo. Dietindo hanya bertindak sebagai penyedia jasa catering diet mayo selama 13 hari dengan ketentuan dan siklus yang berlaku pada diet mayo. Klien harus mematuhi benar terhadap ketentuan diet mayo. Apabila tidak terjadi penurunan berat badan klien seperti yang diharapkan, Dietindo tidak bertanggung jawab atas hal tersebut.</string>
+    <string name="package_weight_loss_description_2" translatable="false">Pengiriman hanya 1x sehari untuk makan siang dan makan malam. Menu Makan pagi disiapkan oleh klien sesuai petunjuk.</string>
+    <string name="day">Day</string>
+    <string name="day_to_send">Day to Send</string>
+    <string name="time_to_send">Time to Send</string>
+    <string name="amount">Amount</string>
+    <string name="order">Order</string>
+    <string name="payment_warning">The amount you have to pay</string>
+    <string name="one_step_more">One step more</string>
+    <string name="order_now">Order Now</string>
+    <string name="choose_package">Choose from 4 kind of package</string>
+    <string name="please_enter_your_data">Please enter your valid data completely before going to the next step</string>
+    <string name="notice_medical_data">Please make sure that your medical data is correct, click confirm to confirm this disclaimer, and click ensure button to be directed to the medical data edit form!</string>
+    <string name="notice_medical_data_title">Validate the medical data</string>
+    <string name="confirm">Confirm</string>
+    <string name="ensure">Ensure</string>
+    <string name="package_daily_personal_content" translatable="false">Terdiri dari nasi, lauk hewani, lauk nabati, sayur, snack atau buah, kerupuk dan sambal yang dikonsumsi untuk satu orang.</string>
+    <string name="package_daily_family2_content" translatable="false">Terdiri dari nasi, lauk hewani, lauk nabati, sayur, snack atau buah, kerupuk dan sambal yang dikonsumsi untuk dua orang.</string>
+    <string name="package_daily_family3_content" translatable="false">Terdiri dari nasi, lauk hewani, lauk nabati, sayur, snack atau buah, kerupuk dan sambal yang dikonsumsi untuk tiga orang.</string>
+    <string name="description">Description</string>
+    <string name="about_developer">Developer</string>
+    <string name="pay_before">Please pay before</string>
+    <string name="payment_cancelled">If passed, the transaction will automatically cancelled.</string>
+    <string name="upload_place">Upload your payment proof here</string>
+    <string name="choose">Choose</string>
+    <string name="unpaid">Unpaid</string>
+    <string name="paid">Paid</string>
+    <string name="done">Done</string>
+    <string name="lunch">Lunch</string>
+    <string name="time">Time</string>
+    <string name="transaction_id">Transaction ID</string>
+    <string name="status">Status</string>
+    <string name="pay">Pay</string>
+    <string name="accept">Accept</string>
+    <string name="extend">Extend</string>
+    <string name="notice_create_transaction">I agree the terms of Diet Online transaction agreement</string>
+    <string name="agreement_unchecked">Please check the agreement checkbox!</string>
+    <string name="notice_extend_order">You can extend order only if your available order is last 3</string>
+    <string name="note">Note</string>
+    <string name="notice_select_days_and_times">Please select the days and times to send</string>
+    <string name="notice_minimum_amount">Minimum amount is 5</string>
+    <string name="processing_transaction">Processing your transaction</string>
+    <string name="next">Next</string>
+    <string name="fetching_data">Fetching data</string>
+    <string name="breakfast">Breakfast</string>
+    <string name="dinner">Dinner</string>
+    <string name="choose_image">Choose Image</string>
+    <string name="processing_upload">Processing upload</string>
+    <string name="successfully_uploaded">Successfully uploaded</string>
+    <string name="successfully_cancelled">Successfully cancelled</string>
+    <string name="confirmed">Confirmed</string>
+    <string name="failed_confirmation">Failed confirmation</string>
+    <string name="notice_unpaid">Please pay your previous transaction first</string>
+    <string name="loading_profile">Loading profile</string>
+    <string name="your_package">Your package</string>
+    <string name="january">January</string>
+    <string name="february">February</string>
+    <string name="march">March</string>
+    <string name="april">April</string>
+    <string name="may">May</string>
+    <string name="june">June</string>
+    <string name="july">July</string>
+    <string name="august">August</string>
+    <string name="september">September</string>
+    <string name="october">October</string>
+    <string name="november">November</string>
+    <string name="december">December</string>
+    <string name="login">Log in</string>
+    <string name="password">Password</string>
+    <string name="successfully_login">Successfully logged in, congrats!</string>
+    <string name="remaining">remaining</string>
+    <string name="signup">Sign Up</string>
+    <string name="notice_no_account">Don\'t have an account?</string>
+    <string name="notice_forgot_password">Forgot your password?</string>
+    <string name="reset_password">Reset Password</string>
+    <string name="greeting_night">Good Night</string>
+    <string name="send_request">Send Request</string>
+    <string name="successfully_create_transaction">Successfully add an order, congrats!</string>
+    <string name="notice_maximum_amount">Maximum amount is 100</string>
+    <string name="sedentary">Sedentary</string>
+    <string name="sedentary_description">Daily activities require minimal effort such as resting, desk work or driving.</string>
+    <string name="low_active">Low Active</string>
+    <string name="low_active_description">Daily activities require some effort such as periods of standing, housework or some light exercise.</string>
+    <string name="active">Active</string>
+    <string name="active_description">Daily activities require reasonable effort such as standing, physical work or regular moderate exercise.</string>
+    <string name="very_active">Very Active</string>
+    <string name="very_active_description">Daily activities require intense physical effort such as construction work or regular vigorous exercise.</string>
+    <string name="notice_has_account">Already have acoount?</string>
+    <string name="start">Start</string>
+    <string name="package_recommended">Recommended</string>
+    <string name="total">Total</string>
+    <string name="delivery">Delivery</string>
+    <string name="free">Free</string>
+    <string name="detail">Detail</string>
+    <string name="pay_later">Pay later</string>
+    <string name="upload">Upload</string>
+    <string name="loading">Loading</string>
 
     <string-array name="cities">
         <item>Malang</item>
-        <item>Surabaya</item>
     </string-array>
     <string-array name="subdistrict">
         <item>Lowokwaru</item>
         <item>Dinoyo</item>
+    </string-array>
+    <string-array name="days">
+        <item>Mon</item>
+        <item>Tue</item>
+        <item>Wed</item>
+        <item>Thu</item>
+        <item>Fri</item>
+        <item>Sat</item>
+        <item>Sun</item>
+    </string-array>
+    <string-array name="times">
+        <item>Breakfast</item>
+        <item>Lunch</item>
+        <item>Dinner</item>
     </string-array>
 </resources>

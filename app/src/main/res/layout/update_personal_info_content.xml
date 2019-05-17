@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".auth.UpdatePersonalInfo">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -93,48 +95,53 @@
                 android:layout_marginTop="16sp"
                 android:text="Birth Date" />
 
-            <LinearLayout
+            <EditText
+                android:id="@+id/input_birthday"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:orientation="horizontal">
+                android:layout_height="40dp" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/date"
-                    android:textSize="20sp" />
+            <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="40dp"-->
+            <!--android:orientation="horizontal">-->
 
-                <EditText
-                    android:id="@+id/input_birth_date"
-                    android:layout_width="60dp"
-                    android:layout_height="40dp"
-                    android:inputType="datetime" />
+            <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="@string/date"-->
+            <!--android:textSize="20sp" />-->
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/month"
-                    android:textSize="20sp" />
+            <!--<EditText-->
+            <!--android:id="@+id/input_birth_date"-->
+            <!--android:layout_width="60dp"-->
+            <!--android:layout_height="40dp"-->
+            <!--android:inputType="datetime" />-->
 
-                <EditText
-                    android:id="@+id/input_birth_month"
-                    android:layout_width="60dp"
-                    android:layout_height="40dp"
-                    android:inputType="datetime" />
+            <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="@string/month"-->
+            <!--android:textSize="20sp" />-->
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/year"
-                    android:textSize="20sp" />
+            <!--<EditText-->
+            <!--android:id="@+id/input_birth_month"-->
+            <!--android:layout_width="60dp"-->
+            <!--android:layout_height="40dp"-->
+            <!--android:inputType="datetime" />-->
 
-                <EditText
-                    android:id="@+id/input_birth_year"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:inputType="datetime" />
+            <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="@string/year"-->
+            <!--android:textSize="20sp" />-->
 
-            </LinearLayout>
+            <!--<EditText-->
+            <!--android:id="@+id/input_birth_year"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="40dp"-->
+            <!--android:inputType="datetime" />-->
+
+            <!--</LinearLayout>-->
 
             <TextView
                 android:layout_width="match_parent"
@@ -142,27 +149,44 @@
                 android:layout_marginTop="16sp"
                 android:text="Gender" />
 
-            <RadioGroup
-                android:id="@+id/input_gender"
-                android:layout_width="match_parent"
+            <LinearLayout
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <RadioButton
-                    android:id="@+id/input_gender_male"
+                <co.ceryle.segmentedbutton.SegmentedButtonGroup
+                    android:id="@+id/input_gender"
                     android:layout_width="wrap_content"
-                    android:layout_height="40dp"
-                    android:layout_marginEnd="40dp"
-                    android:checked="true"
-                    android:text="@string/male" />
+                    android:layout_height="wrap_content"
+                    android:layout_margin="4dp"
+                    android:layout_weight="1"
+                    android:elevation="2dp"
+                    app:sbg_backgroundColor="@color/white"
+                    app:sbg_radius="30dp"
+                    app:sbg_rippleColor="@color/black"
+                    app:sbg_selectorColor="@color/colorPrimary">
 
-                <RadioButton
-                    android:id="@+id/input_gender_female"
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dp"
-                    android:text="@string/female" />
+                    <co.ceryle.segmentedbutton.SegmentedButton
+                        android:id="@+id/gender_male"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_weight="1"
+                        android:padding="4dp"
+                        app:sb_drawable="@drawable/ic_mars_24px"
+                        app:sb_drawableTint_onSelection="@color/white" />
 
-            </RadioGroup>
+                    <co.ceryle.segmentedbutton.SegmentedButton
+                        android:id="@+id/gender_female"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:padding="4dp"
+                        android:layout_weight="1"
+                        app:sb_drawable="@drawable/ic_venus_24px"
+                        app:sb_drawableTint_onSelection="@color/white" />
+
+                </co.ceryle.segmentedbutton.SegmentedButtonGroup>
+
+            </LinearLayout>
 
             <TextView
                 android:layout_width="match_parent"

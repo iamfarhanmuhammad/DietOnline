@@ -8,6 +8,10 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 
+import net.gotev.uploadservice.UploadService;
+
+import id.havanah.app.dietonline.BuildConfig;
+
 /**
  * Created by farhan at 08:57
  * on 31/03/2019.
@@ -22,6 +26,7 @@ public class AppController extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        UploadService.NAMESPACE = BuildConfig.APPLICATION_ID;
         instance = this;
         context = getApplicationContext();
     }
