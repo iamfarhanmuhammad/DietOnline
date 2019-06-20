@@ -28,7 +28,7 @@ import java.util.Queue;
  */
 public abstract class RecyclerItemTouchHelper extends ItemTouchHelper.SimpleCallback {
 
-    private static final int BUTTON_WIDTH = 140;
+    private static final int BUTTON_WIDTH = 160;
     private RecyclerView recyclerView;
     private List<UnderlayButton> buttons;
     private GestureDetector gestureDetector;
