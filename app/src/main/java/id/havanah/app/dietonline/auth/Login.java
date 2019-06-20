@@ -3,7 +3,9 @@ package id.havanah.app.dietonline.auth;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
@@ -57,6 +59,14 @@ public class Login extends AppCompatActivity {
 
         inputUsername = findViewById(R.id.input_username);
         inputPassword = findViewById(R.id.input_password);
+
+        TextView linkToPrivacyPolicy = findViewById(R.id.btn_privacyPolicy);
+        linkToPrivacyPolicy.setMovementMethod(LinkMovementMethod.getInstance());
+        linkToPrivacyPolicy.setOnClickListener(v -> {
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW);
+            browserIntent.setData(Uri.parse("http://dion.co.id/docs/Privacy%20Policies%20DION.pdf"));
+            startActivity(browserIntent);
+        });
 
         TextView linkToRegister = findViewById(R.id.btn_toRegister);
         linkToRegister.setOnClickListener(v -> {
@@ -154,8 +164,7 @@ public class Login extends AppCompatActivity {
                     db.addUser(uid, username1, email, city, subdistrict, name, nickname, address, phone, birth_date, gender, created_at, updated_at);
                     db.updateMedicalInfo(weight, height, prohibition, updated_at);
                     // Launch main activity
-                    Intent intent = new Intent(Login.this, Home.class);
-                    startActivity(intent);
+                    startActivity(new Intent(Login.this, Home.class));
                     finish();
                 } else {
                     // Error in login_view. Get the error message

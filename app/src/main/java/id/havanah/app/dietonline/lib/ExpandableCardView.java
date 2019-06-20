@@ -24,8 +24,8 @@ import androidx.annotation.RequiresApi;
 import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 
-import id.havanah.app.androidjavautils.Utils;
 import id.havanah.app.dietonline.R;
+import id.havanah.app.dietonline.util.Utils;
 
 /**
  * Copyright (c) 2018 Alessandro Sperotti

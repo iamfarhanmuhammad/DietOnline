@@ -20,6 +20,8 @@ import java.util.Map;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
+import id.havanah.app.dietonline.Home;
 import id.havanah.app.dietonline.R;
 import id.havanah.app.dietonline.api.ApiService;
 import id.havanah.app.dietonline.app.AppController;
@@ -102,10 +104,10 @@ public class UpdateMedicalInfo extends AppCompatActivity {
                     String prohibition1 = user.getString("prohibition");
                     String updated_at = user.getString("updated_at");
 
-                    Toast.makeText(this, "Successfully updated, congrats!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, getResources().getString(R.string.successfully_updated), Toast.LENGTH_SHORT).show();
                     db.updateMedicalInfo(weight1, height1, prohibition1, updated_at);
 
-                    Intent intent = new Intent(UpdateMedicalInfo.this, Profile.class);
+                    Intent intent = new Intent(UpdateMedicalInfo.this, Home.class);
                     startActivity(intent);
                     finish();
                 } else {

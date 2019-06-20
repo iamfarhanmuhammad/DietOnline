@@ -23,7 +23,7 @@
                 android:layout_height="match_parent"
                 android:alpha="0.8"
                 android:scaleType="centerCrop"
-                android:src="@drawable/img_ngaji" />
+                android:src="@drawable/img_daily_package_slide" />
 
             <TextView
                 android:id="@+id/package_name"

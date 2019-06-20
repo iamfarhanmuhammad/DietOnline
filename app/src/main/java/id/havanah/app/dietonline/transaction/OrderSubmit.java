@@ -17,6 +17,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
@@ -46,16 +47,12 @@ public class OrderSubmit extends AppCompatActivity {
     private ImageView proofImage;
 
     private static final String TAG = OrderSubmit.class.getSimpleName();
-    private int price, amount, total;
 
     //Image request code
     private int PICK_IMAGE_REQUEST = 1;
 
     //storage permission code
     private static final int STORAGE_PERMISSION_CODE = 123;
-
-    //Bitmap to get image from gallery
-    private Bitmap bitmap;
 
     //Uri to store the image uri
     private Uri filePath;
@@ -69,21 +66,25 @@ public class OrderSubmit extends AppCompatActivity {
         requestStoragePermission();
 
         ImageView btnBack = findViewById(R.id.home);
-        btnBack.setOnClickListener(v -> onBackPressed());
+        btnBack.setOnClickListener(v -> {
+            startActivity(new Intent(OrderSubmit.this, OrderStatus.class));
+            finish();
+        });
         db = new SQLiteHandler(this);
 
         // fetch data
-        amount = Integer.parseInt(getIntent().getStringExtra("amount"));
-        price = Integer.parseInt(getIntent().getStringExtra("price"));
+        int amount = Integer.parseInt(getIntent().getStringExtra("amount"));
+        int price = Integer.parseInt(getIntent().getStringExtra("price"));
         invoice = getIntent().getStringExtra("invoice");
-        total = amount * price;
+        int total = amount * price;
         TextView orderDetail = findViewById(R.id.order_detail);
         TextView orderAmount = findViewById(R.id.order_amount);
         orderDetail.setText(String.format(Locale.US, "Rp %d x %d", price, amount));
         orderAmount.setText(String.format(Locale.US, "Rp %d", total));
 
         // Declaring views
-        Button buttonChoose = findViewById(R.id.btn_choose);
+        CardView buttonChoose = findViewById(R.id.btn_choose);
+        CardView buttonCapture = findViewById(R.id.btn_capture);
         Button buttonUpload = findViewById(R.id.btn_upload);
         Button buttonPending = findViewById(R.id.btn_pending);
         proofImage = findViewById(R.id.proof_image);
@@ -100,46 +101,51 @@ public class OrderSubmit extends AppCompatActivity {
      * We need the full image path and the name for the image in this method
      * */
     public void uploadImage(String invoice) {
-        //getting the actual path of the image
-        String path = getPath(filePath);
 
-        //Uploading code
-        try {
-            String uploadId = UUID.randomUUID().toString();
+        if (isSelected(filePath)) {
+            //getting the actual path of the image
+            String path = getPath(filePath);
 
-            //Creating a multi part request
-            new MultipartUploadRequest(this, uploadId, ApiService.updatePaid)
-                    .addFileToUpload(path, "proof") //Adding file
-                    .addParameter("invoice", invoice) //Adding text parameter to the request
-                    .setNotificationConfig(new UploadNotificationConfig())
-                    .setMaxRetries(2)
-                    .setDelegate(new UploadStatusDelegate() {
-                        @Override
-                        public void onProgress(Context context, UploadInfo uploadInfo) {
-                            Toast.makeText(context, getResources().getString(R.string.processing_upload), Toast.LENGTH_SHORT).show();
-                        }
+            //Uploading code
+            try {
+                String uploadId = UUID.randomUUID().toString();
 
-                        @Override
-                        public void onError(Context context, UploadInfo uploadInfo, ServerResponse serverResponse, Exception exception) {
-                            Toast.makeText(context, "Error" + serverResponse.toString(), Toast.LENGTH_SHORT).show();
-                        }
+                //Creating a multi part request
+                new MultipartUploadRequest(this, uploadId, ApiService.updatePaid)
+                        .addFileToUpload(path, "proof") //Adding file
+                        .addParameter("invoice", invoice) //Adding text parameter to the request
+                        .setNotificationConfig(new UploadNotificationConfig())
+                        .setMaxRetries(2)
+                        .setDelegate(new UploadStatusDelegate() {
+                            @Override
+                            public void onProgress(Context context, UploadInfo uploadInfo) {
+                                Toast.makeText(context, getResources().getString(R.string.processing_upload), Toast.LENGTH_SHORT).show();
+                            }
 
-                        @Override
-                        public void onCompleted(Context context, UploadInfo uploadInfo, ServerResponse serverResponse) {
-                            Toast.makeText(context, getResources().getString(R.string.successfully_uploaded), Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(OrderSubmit.this, OrderStatus.class));
-                            finish();
-                        }
+                            @Override
+                            public void onError(Context context, UploadInfo uploadInfo, ServerResponse serverResponse, Exception exception) {
+                                Toast.makeText(context, "Error" + serverResponse.toString(), Toast.LENGTH_SHORT).show();
+                            }
 
-                        @Override
-                        public void onCancelled(Context context, UploadInfo uploadInfo) {
-                            Toast.makeText(context, getResources().getString(R.string.successfully_cancelled), Toast.LENGTH_SHORT).show();
-                        }
-                    })
-                    .startUpload(); //Starting the upload
+                            @Override
+                            public void onCompleted(Context context, UploadInfo uploadInfo, ServerResponse serverResponse) {
+                                Toast.makeText(context, getResources().getString(R.string.successfully_uploaded), Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(OrderSubmit.this, OrderStatus.class));
+                                finish();
+                            }
 
-        } catch (Exception exc) {
-            Toast.makeText(this, exc.getMessage(), Toast.LENGTH_SHORT).show();
+                            @Override
+                            public void onCancelled(Context context, UploadInfo uploadInfo) {
+                                Toast.makeText(context, getResources().getString(R.string.successfully_cancelled), Toast.LENGTH_SHORT).show();
+                            }
+                        })
+                        .startUpload(); //Starting the upload
+
+            } catch (Exception exc) {
+                Toast.makeText(this, exc.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        } else {
+            Toast.makeText(this, getResources().getString(R.string.notice_no_image_chosen), Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -159,13 +165,18 @@ public class OrderSubmit extends AppCompatActivity {
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
             filePath = data.getData();
             try {
-                bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
+                //Bitmap to get image from gallery
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
                 proofImage.setImageBitmap(bitmap);
 
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
+    }
+
+    public boolean isSelected(Uri uri) {
+        return uri != null;
     }
 
     //method to get the file path from uri
@@ -182,7 +193,6 @@ public class OrderSubmit extends AppCompatActivity {
         cursor.moveToFirst();
         String path = cursor.getString(cursor.getColumnIndex(MediaStore.Images.Media.DATA));
         cursor.close();
-
         return path;
     }
 

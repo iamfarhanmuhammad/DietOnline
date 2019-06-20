@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="@dimen/activity_horizontal_margin"
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/img_partner" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        android:fontFamily="@font/nunito_sans_bold"
+        android:text="Mitra DION"
+        android:textColor="@color/black"
+        android:textSize="18sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+        android:fontFamily="@font/nunito_sans_regular"
+        android:text="DION merupakan wadah bagi mitra katering sehat untuk menyalurkan paket mereka. Penyedia dari DION yang pertama adalah PT.DIETINDO. Sementara ini, DION hanya dapat beroperasi di Kota Malang. Untuk Info lebih lanjut mengenai DIETINDO dapat mengunjungi: "
+        android:textSize="16sp" />
+
+    <Button
+        android:id="@+id/btn_toDietindo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="@dimen/activity_horizontal_margin"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+        android:autoLink="web"
+        android:background="@color/colorPrimary"
+        android:clickable="true"
+        android:cursorVisible="true"
+        android:fontFamily="@font/nunito_sans_bold"
+        android:linksClickable="true"
+        android:onClick="goToWeb"
+        android:text="DIETINDO"
+        android:textColor="@color/white" />
+
+</LinearLayout>

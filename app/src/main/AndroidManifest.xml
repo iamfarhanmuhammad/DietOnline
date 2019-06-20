@@ -16,7 +16,6 @@
         <activity android:name=".SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -34,7 +33,7 @@
         <activity android:name=".transaction.order.DailyPackageForward" />
         <activity android:name=".transaction.order.LunchPackageForward" />
         <activity android:name=".transaction.OrderSubmit" />
-        <activity android:name=".transaction.order.SpecificPackageForward" />
+        <activity android:name=".transaction.order.SpecificPackageMenus" />
         <activity android:name=".transaction.order.SpecificPackageView" />
         <activity android:name=".transaction.OrderStatus" />
         <activity android:name=".transaction.order.WeightLossPackageView" />
@@ -45,6 +44,12 @@
         <activity android:name=".ManualBook" />
         <activity android:name=".auth.ResetPassword" />
         <activity android:name=".transaction.order.RecommendedPackageView" />
+        <activity android:name=".transaction.order.WeightLossPackageForward" />
+        <activity android:name=".transaction.order.SpecificPackageUploadImage" />
+        <activity android:name=".transaction.order.SpecificPackageActivities" />
+        <activity android:name=".ComingSoon" />
+        <activity android:name=".transaction.order.SpecificPackageFoodType" />
+        <activity android:name=".transaction.order.SpecificPackageTimesToSend" />
     </application>
 
 </manifest>

@@ -1,9 +1,11 @@
 package id.havanah.app.dietonline.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -14,6 +16,7 @@ import java.util.Locale;
 
 import id.havanah.app.dietonline.R;
 import id.havanah.app.dietonline.model.SpecificPackageModel;
+import id.havanah.app.dietonline.transaction.order.SpecificPackageTimesToSend;
 
 /**
  * Created by farhan at 11:35
@@ -43,7 +46,7 @@ public class SpecificPackageAdapter extends PagerAdapter {
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.order_specific_package_item, container, false);
+        View view = inflater.inflate(R.layout.order_specific_package_menus_item, container, false);
 
 //        ImageView image = view.findViewById(R.id.package_image);
         TextView name = view.findViewById(R.id.weightLossPackage_name);
@@ -57,6 +60,7 @@ public class SpecificPackageAdapter extends PagerAdapter {
         TextView desc7 = view.findViewById(R.id.weightLossPackage_desc7);
         TextView desc8 = view.findViewById(R.id.weightLossPackage_desc8);
         TextView desc9 = view.findViewById(R.id.weightLossPackage_desc9);
+        Button btnChoose = view.findViewById(R.id.btn_chooseSpecificPackage);
 
         SpecificPackageModel model = list.get(position);
 
@@ -72,6 +76,12 @@ public class SpecificPackageAdapter extends PagerAdapter {
         desc7.setText(model.getDesc7());
         desc8.setText(model.getDesc8());
         desc9.setText(model.getDesc9());
+
+        btnChoose.setOnClickListener(v -> {
+            Intent intent = new Intent(context, SpecificPackageTimesToSend.class);
+            intent.putExtra("product_id", model.getProduct_id());
+            context.startActivity(intent);
+        });
 
         container.addView(view, 0);
         return view;

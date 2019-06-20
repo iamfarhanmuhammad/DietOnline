@@ -1,6 +1,7 @@
 package id.havanah.app.dietonline;
 
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,5 +16,9 @@ public class Chat extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.coming_soon);
+    }
+
+    public void onBackPressed(View view) {
+        onBackPressed();
     }
 }

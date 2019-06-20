@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -19,21 +20,23 @@ import com.android.volley.toolbox.StringRequest;
 import com.nex3z.togglebuttongroup.MultiSelectToggleGroup;
 import com.nex3z.togglebuttongroup.button.LabelToggle;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
-import id.havanah.app.androidjavautils.Utils;
 import id.havanah.app.dietonline.R;
 import id.havanah.app.dietonline.api.ApiService;
 import id.havanah.app.dietonline.app.AppController;
 import id.havanah.app.dietonline.auth.UserData;
 import id.havanah.app.dietonline.helper.SQLiteHandler;
 import id.havanah.app.dietonline.transaction.OrderSubmit;
+import id.havanah.app.dietonline.util.Utils;
 
 /**
  * Created by farhan at 00:54
@@ -46,7 +49,7 @@ public class LunchPackageForward extends AppCompatActivity {
     private UserData userData;
     private Utils utils;
     private ProgressDialog progressDialog;
-    private MultiSelectToggleGroup multiDays;
+    //    private MultiSelectToggleGroup multiDays;
     private EditText inputAmount, inputNote;
     private CheckBox agreement;
     private String userId, productId, productName, orderAmount, orderNote;
@@ -85,7 +88,7 @@ public class LunchPackageForward extends AppCompatActivity {
         name.setText(productName);
         price.setText(String.format(Locale.US, "Rp %d", productPrice));
 
-        multiDays = findViewById(R.id.multiSelectToggleGroup_day);
+        MultiSelectToggleGroup multiDays = findViewById(R.id.multiSelectToggleGroup_day);
         String[] daysArray = getResources().getStringArray(R.array.days);
         for (String text : daysArray) {
             LabelToggle toggle = new LabelToggle(this);
@@ -93,9 +96,6 @@ public class LunchPackageForward extends AppCompatActivity {
             toggle.setMarkerColor(getResources().getColor(R.color.colorPrimary));
             multiDays.addView(toggle);
         }
-        multiDays.setOnCheckedChangeListener((group, checkedId, isChecked) -> {
-            Log.v(TAG, "onCheckedStateChanged(): group.getCheckedIds() = " + group.getCheckedIds());
-        });
 
         Button btnOrder = findViewById(R.id.btn_order);
         btnOrder.setOnClickListener(v -> {
@@ -103,14 +103,20 @@ public class LunchPackageForward extends AppCompatActivity {
             orderNote = inputNote.getText().toString();
 
             Set<Integer> daysCheckedIds = multiDays.getCheckedIds();
-            selectedDays = utils.convertSetIntegerToIntArray(daysCheckedIds);
-
+            Set<Integer> daysChecked = new HashSet<>(); // Holder for all checked positions
+            for (int id : daysCheckedIds) {
+                View view = multiDays.findViewById(id);
+                int position = multiDays.indexOfChild(view);
+                daysChecked.add(position);
+            }
+            selectedDays = utils.convertSetIntegerToIntArray(daysChecked, 1);
             String days = utils.convertIntArrayToString(selectedDays);
             String times = "2";
+
             if (agreement.isChecked()) {
                 if (orderAmount.isEmpty()) {
                     Toast.makeText(this, getResources().getString(R.string.notice_minimum_amount), Toast.LENGTH_SHORT).show();
-                } else if (daysCheckedIds.isEmpty() || times.isEmpty()) {
+                } else if (daysChecked.isEmpty() || times.isEmpty()) {
                     Toast.makeText(this, getResources().getString(R.string.notice_select_days_and_times), Toast.LENGTH_SHORT).show();
                 } else {
                     if (Integer.parseInt(orderAmount) < 5) {
@@ -146,10 +152,12 @@ public class LunchPackageForward extends AppCompatActivity {
                 if (!error) {
                     Toast.makeText(LunchPackageForward.this, getResources().getString(R.string.successfully_create_transaction), Toast.LENGTH_SHORT).show();
                     JSONObject product = jsonObject.getJSONObject("product");
-                    JSONObject transaction = jsonObject.getJSONObject("transactions");
+
+                    JSONArray transactions = jsonObject.getJSONArray("transactions");
+                    JSONObject transaction = transactions.getJSONObject(0);
                     // Launch main activity
                     Intent intent = new Intent(LunchPackageForward.this, OrderSubmit.class);
-                    intent.putExtra("amount", jsonObject.getString("amount"));
+                    intent.putExtra("amount", a);
                     intent.putExtra("price", product.getString("price"));
                     intent.putExtra("invoice", transaction.getString("invoice"));
                     startActivity(intent);

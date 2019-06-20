@@ -89,9 +89,7 @@
         app:tbgChildSpacing="auto"
         app:tbgChildSpacingForLastRow="align"
         app:tbgFlow="true"
-        app:tbgRowSpacing="8dp">
-
-    </com.nex3z.togglebuttongroup.MultiSelectToggleGroup>
+        app:tbgRowSpacing="8dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -110,9 +108,7 @@
         app:tbgChildSpacing="8sp"
         app:tbgChildSpacingForLastRow="align"
         app:tbgFlow="true"
-        app:tbgRowSpacing="8dp">
-
-    </com.nex3z.togglebuttongroup.MultiSelectToggleGroup>
+        app:tbgRowSpacing="8dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -143,7 +139,7 @@
     <EditText
         android:id="@+id/input_note"
         android:layout_width="match_parent"
-        android:layout_height="40sp"
+        android:layout_height="80sp"
         android:layout_marginStart="@dimen/activity_horizontal_margin"
         android:layout_marginEnd="@dimen/activity_horizontal_margin"
         android:background="@drawable/shape_rectangle_white"

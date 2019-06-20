@@ -11,8 +11,10 @@ import com.google.android.material.tabs.TabLayout;
 
 import id.havanah.app.dietonline.R;
 import id.havanah.app.dietonline.adapter.StatusPagerAdapter;
+import id.havanah.app.dietonline.helper.CustomViewPager;
 import id.havanah.app.dietonline.transaction.status.Done;
 import id.havanah.app.dietonline.transaction.status.Paid;
+import id.havanah.app.dietonline.transaction.status.Pending;
 import id.havanah.app.dietonline.transaction.status.Unpaid;
 
 /**
@@ -24,7 +26,7 @@ public class OrderStatus extends AppCompatActivity {
 
     private StatusPagerAdapter adapter;
     private TabLayout tabLayout;
-    private ViewPager viewPager;
+    private CustomViewPager viewPager;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -39,9 +41,11 @@ public class OrderStatus extends AppCompatActivity {
 
         adapter = new StatusPagerAdapter(getSupportFragmentManager(), this);
         adapter.addFragment(new Unpaid(), getResources().getString(R.string.unpaid));
+        adapter.addFragment(new Pending(), getResources().getString(R.string.pending));
         adapter.addFragment(new Paid(), getResources().getString(R.string.paid));
         adapter.addFragment(new Done(), getResources().getString(R.string.done));
         viewPager.setAdapter(adapter);
+        viewPager.disableScroll(true);
         tabLayout.setupWithViewPager(viewPager);
         highLightCurrentTab(0); // for initial selected tab view
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {

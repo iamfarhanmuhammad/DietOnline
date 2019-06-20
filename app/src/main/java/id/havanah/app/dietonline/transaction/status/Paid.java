@@ -1,11 +1,16 @@
 package id.havanah.app.dietonline.transaction.status;
 
+import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -26,13 +31,16 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import id.havanah.app.dietonline.R;
 import id.havanah.app.dietonline.adapter.StatusAdapter;
 import id.havanah.app.dietonline.api.ApiService;
 import id.havanah.app.dietonline.app.AppController;
 import id.havanah.app.dietonline.auth.UserData;
+import id.havanah.app.dietonline.helper.RecyclerItemTouchHelper;
 import id.havanah.app.dietonline.model.StatusModel;
+import id.havanah.app.dietonline.transaction.OrderStatus;
 
 /**
  * Created by farhan at 18:37
@@ -56,6 +64,19 @@ public class Paid extends Fragment {
         progressDialog = new ProgressDialog(getContext());
         progressDialog.setCancelable(false);
         initRecyclerView(view);
+
+        RecyclerItemTouchHelper swipeHelper = new RecyclerItemTouchHelper(getContext(), recyclerView) {
+            @Override
+            public void instantiateUnderlayButton(RecyclerView.ViewHolder viewHolder, List<RecyclerItemTouchHelper.UnderlayButton> underlayButtons) {
+                underlayButtons.add(new RecyclerItemTouchHelper.UnderlayButton(
+                        getContext().getResources().getString(R.string.edit_note),
+                        R.drawable.ic_edit_black_24dp,
+                        Color.parseColor("#FFD700"),
+                        pos -> initPopup(list.get(pos).getId())
+                ));
+            }
+        };
+
         fetchData();
         initExtendButton(view);
         return view;
@@ -83,6 +104,44 @@ public class Paid extends Fragment {
 
     public int getSize() {
         return size;
+    }
+
+    private void initPopup(String uid) {
+        Dialog dialog = new Dialog(getContext());
+        dialog.setCancelable(true);
+        dialog.setContentView(R.layout.order_status_item_edit_note_popup);
+        EditText inputNewNote = dialog.findViewById(R.id.input_newNote);
+        Button btnCancel = dialog.findViewById(R.id.btn_cancel);
+        btnCancel.setOnClickListener(v -> dialog.dismiss());
+        Button btnConfirm = dialog.findViewById(R.id.btn_confirm);
+        btnConfirm.setOnClickListener(v -> {
+            String newNote = inputNewNote.getText().toString();
+            progressDialog.setMessage(getContext().getResources().getString(R.string.updating));
+            showDialog();
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, ApiService.updateNote,
+                    response -> {
+                        hideDialog();
+                        Toast.makeText(getContext(), getContext().getResources().getString(R.string.successfully_updated), Toast.LENGTH_SHORT).show();
+                        Objects.requireNonNull(getActivity()).finish();
+                        getContext().startActivity(new Intent(getContext(), OrderStatus.class));
+                    },
+                    error -> {
+                        hideDialog();
+                        Toast.makeText(getContext(), "" + error.getMessage(), Toast.LENGTH_SHORT).show();
+                        Objects.requireNonNull(getActivity()).finish();
+                        getContext().startActivity(new Intent(getContext(), OrderStatus.class));
+                    }) {
+                @Override
+                protected Map<String, String> getParams() {
+                    Map<String, String> params = new HashMap<>();
+                    params.put("uid", uid);
+                    params.put("notes", newNote);
+                    return params;
+                }
+            };
+            AppController.getInstance().addToRequestQueue(stringRequest);
+        });
+        dialog.show();
     }
 
     private void fetchData() {
@@ -133,7 +192,7 @@ public class Paid extends Fragment {
             protected Map<String, String> getParams() {
                 HashMap<String, String> params = new HashMap<>();
                 params.put("user_id", user_id);
-                params.put("status", "2");
+                params.put("status", "3");
                 return params;
             }
         };

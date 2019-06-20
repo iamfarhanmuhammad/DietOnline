@@ -1,5 +1,6 @@
 package id.havanah.app.dietonline.adapter;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -84,13 +85,17 @@ public class StatusAdapter extends RecyclerView.Adapter<StatusAdapter.ViewHolder
                         JSONObject jsonObject = new JSONObject(response);
                         Intent intent = new Intent(context, OrderSubmit.class);
                         intent.putExtra("invoice", statusModel.getInvoice());
-                        if (jsonObject.getString("product_id").equalsIgnoreCase("WL001")) {
+                        if (jsonObject.getString("product_id").equalsIgnoreCase("WL001") ||
+                                jsonObject.getString("product_id").equalsIgnoreCase("SP001") ||
+                                jsonObject.getString("product_id").equalsIgnoreCase("SP002") ||
+                                jsonObject.getString("product_id").equalsIgnoreCase("SP003")) {
                             intent.putExtra("amount", "1");
                         } else {
                             intent.putExtra("amount", jsonObject.getString("amount"));
                         }
                         intent.putExtra("price", jsonObject.getString("price"));
                         context.startActivity(intent);
+                        ((Activity) context).finish();
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -110,6 +115,12 @@ public class StatusAdapter extends RecyclerView.Adapter<StatusAdapter.ViewHolder
             holder.ticketHeader.setCardBackgroundColor(context.getResources().getColor(R.color.red));
             holder.ticketBody.setCardBackgroundColor(context.getResources().getColor(R.color.red));
         } else if (Integer.parseInt(statusModel.getStatus()) == 2) {
+            holder.status.setText(context.getResources().getString(R.string.pending));
+            holder.status.setTextColor(context.getResources().getColor(R.color.gray));
+            holder.btnAction.setVisibility(View.GONE);
+            holder.ticketHeader.setCardBackgroundColor(context.getResources().getColor(R.color.gray));
+            holder.ticketBody.setCardBackgroundColor(context.getResources().getColor(R.color.gray));
+        } else if (Integer.parseInt(statusModel.getStatus()) == 3) {
             holder.status.setText(context.getResources().getString(R.string.paid));
             holder.status.setTextColor(context.getResources().getColor(R.color.green));
             holder.btnAction.setBackgroundResource(R.drawable.shape_capsule_green);
@@ -142,6 +153,9 @@ public class StatusAdapter extends RecyclerView.Adapter<StatusAdapter.ViewHolder
                 break;
             case "SL002":
                 holder.name.setText("Single Lunch Box - Puas Banget");
+                break;
+            case "WL001":
+                holder.name.setText("Weight Loss");
                 break;
             case "SP001":
                 holder.name.setText("Paket Spesial - Silver");
@@ -213,6 +227,7 @@ public class StatusAdapter extends RecyclerView.Adapter<StatusAdapter.ViewHolder
             hideDialog();
             Toast.makeText(context, context.getResources().getString(R.string.confirmed), Toast.LENGTH_SHORT).show();
             context.startActivity(new Intent(context, OrderStatus.class));
+            ((Activity) context).finish();
         }, error -> {
             hideDialog();
             Toast.makeText(context, context.getResources().getString(R.string.failed_confirmation), Toast.LENGTH_SHORT).show();

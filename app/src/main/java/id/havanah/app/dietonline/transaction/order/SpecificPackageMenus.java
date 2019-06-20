@@ -19,7 +19,7 @@ import id.havanah.app.dietonline.model.SpecificPackageModel;
  * on 14/04/2019.
  * Havanah Team, ID.
  */
-public class SpecificPackageForward extends AppCompatActivity {
+public class SpecificPackageMenus extends AppCompatActivity {
 
     ViewPager viewPager;
     SpecificPackageAdapter adapter;
@@ -28,7 +28,7 @@ public class SpecificPackageForward extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.order_specific_package_forward);
+        setContentView(R.layout.order_specific_package_menus);
 
         ImageView btnBack = findViewById(R.id.home);
         btnBack.setOnClickListener(v -> onBackPressed());

@@ -1,10 +1,12 @@
 package id.havanah.app.dietonline;
 
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,15 +32,16 @@ import java.util.Locale;
 import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
-import id.havanah.app.androidjavautils.Utils;
 import id.havanah.app.dietonline.api.ApiService;
 import id.havanah.app.dietonline.app.AppController;
 import id.havanah.app.dietonline.auth.Login;
+import id.havanah.app.dietonline.auth.UpdateMedicalInfo;
 import id.havanah.app.dietonline.auth.UserData;
 import id.havanah.app.dietonline.helper.SQLiteHandler;
 import id.havanah.app.dietonline.helper.SessionManager;
 import id.havanah.app.dietonline.transaction.Order;
 import id.havanah.app.dietonline.transaction.OrderStatus;
+import id.havanah.app.dietonline.util.Utils;
 
 /**
  * Created by farhan at 23:16
@@ -50,6 +53,7 @@ public class Home extends AppCompatActivity {
     private CardView toOrder, toOrderStatus, toManualBook, toPartner, toDeveloper;
     private SessionManager sessionManager;
     private SQLiteHandler db;
+    private UserData userData;
     private ProgressDialog progressDialog;
 
     @Override
@@ -60,7 +64,7 @@ public class Home extends AppCompatActivity {
         Utils utils = new Utils(this);
         sessionManager = new SessionManager(getApplicationContext());
         db = new SQLiteHandler(getApplicationContext());
-        UserData userData = new UserData();
+        userData = new UserData();
         progressDialog = new ProgressDialog(this);
         progressDialog.setCancelable(false);
 
@@ -68,6 +72,8 @@ public class Home extends AppCompatActivity {
         if (!sessionManager.isLoggedIn()) {
             logoutUser();
         }
+
+        initPopUpMedicalData();
 
         SwipeRefreshLayout swipeRefreshLayout = findViewById(R.id.layout_home);
         swipeRefreshLayout.setOnRefreshListener(() -> {
@@ -164,9 +170,12 @@ public class Home extends AppCompatActivity {
         } else if (bmi < 27.0) {
             cardBmi.setCardBackgroundColor(getResources().getColor(R.color.overweight));
             tvBmi.setText(getResources().getString(R.string.overweight));
-        } else {
+        } else if (bmi >= 27.0) {
             cardBmi.setCardBackgroundColor(getResources().getColor(R.color.obese));
             tvBmi.setText(getResources().getString(R.string.obese));
+        } else  {
+            cardBmi.setCardBackgroundColor(getResources().getColor(R.color.gray));
+            tvBmi.setText(getResources().getString(R.string.undefined));
         }
 
         toOrder = findViewById(R.id.cardView_toMakeAPlan);
@@ -179,6 +188,27 @@ public class Home extends AppCompatActivity {
         toPartner.setOnClickListener(v -> startActivity(new Intent(Home.this, AboutPartner.class)));
         toDeveloper = findViewById(R.id.cardView_toAboutDeveloper);
         toDeveloper.setOnClickListener(v -> startActivity(new Intent(Home.this, AboutDeveloper.class)));
+    }
+
+    private void initPopUpMedicalData() {
+        if (userData.getWeight() == null || userData.getHeight() == null || userData.getWeight().equals("0") || userData.getHeight().equals("0")) {
+            displayPopUpMedicalData();
+        }
+    }
+
+    private void displayPopUpMedicalData() {
+        Dialog dialog = new Dialog(Home.this);
+        dialog.setCancelable(true);
+        dialog.setContentView(R.layout.notice_medical_data_popup);
+        Button btnToUpdateMedic = dialog.findViewById(R.id.btn_toUpdateMedic);
+        btnToUpdateMedic.setOnClickListener(v -> toUpdateMedic());
+        Button btnLater = dialog.findViewById(R.id.btn_later);
+        btnLater.setOnClickListener(v -> dialog.dismiss());
+        dialog.show();
+    }
+
+    private void toUpdateMedic() {
+        startActivity(new Intent(Home.this, UpdateMedicalInfo.class));
     }
 
     private void logoutUser() {
@@ -202,10 +232,10 @@ public class Home extends AppCompatActivity {
         } else if (currentTime < 17) {
             imageHeader.setBackgroundResource(R.drawable.img_header_afternoon);
             greeting.setText(getResources().getString(R.string.greeting_afternoon));
-        } else if (currentTime < 20) {
+        } else if (currentTime < 21) {
             imageHeader.setBackgroundResource(R.drawable.img_header_evening);
             greeting.setText(getResources().getString(R.string.greeting_evening));
-        } else if (currentTime < 24) {
+        } else {
             imageHeader.setBackgroundResource(R.drawable.img_header_night);
             greeting.setText(getResources().getString(R.string.greeting_night));
         }

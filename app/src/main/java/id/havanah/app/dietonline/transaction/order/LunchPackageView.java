@@ -1,18 +1,16 @@
 package id.havanah.app.dietonline.transaction.order;
 
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.widget.ImageView;
-
-import com.google.android.material.appbar.CollapsingToolbarLayout;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import id.havanah.app.dietonline.R;
 import id.havanah.app.dietonline.adapter.LunchPackageAdapter;
 import id.havanah.app.dietonline.model.ProductModel;
@@ -41,8 +39,8 @@ public class LunchPackageView extends AppCompatActivity {
 
         //fill with empty objects
         final List<ProductModel> list = new ArrayList<>();
-        list.add(new ProductModel("SL001", "Puas Aja", 16000, R.drawable.img_daily_package_personal, "Makan sampe puas"));
-        list.add(new ProductModel("SL002", "Puas Banget", 18000, R.drawable.img_lunch_package_slide, "Makan sampe teler"));
+        list.add(new ProductModel("SL001", "Paket Puas Aja", 16000, R.drawable.img_daily_package_personal, "Terdiri dari nasi, 1 porsi lauk hewani, lauk nabati, sayur, kerupuk & sambal"));
+        list.add(new ProductModel("SL002", "Paket Puas Banget", 18000, R.drawable.img_daily_package_family_3, "Terdiri dari nasi, 2 porsi lauk hewani, lauk nabati, sayur, kerupuk & sambal"));
         adapter.setItems(list);
     }
 }

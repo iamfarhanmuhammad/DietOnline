@@ -17,6 +17,7 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import id.havanah.app.dietonline.Home;
 import id.havanah.app.dietonline.R;
 import id.havanah.app.dietonline.helper.SessionManager;
+import id.havanah.app.dietonline.util.Utils;
 
 /**
  * Created by farhan at 10:56
@@ -78,17 +79,19 @@ public class Register extends AppCompatActivity {
             String subdistrict = inputSubdistrict.getSelectedItem().toString();
 
             if (!username.isEmpty() && !email.isEmpty() && !password.isEmpty() && !city.isEmpty() && !subdistrict.isEmpty()) {
-                Intent intent = new Intent(Register.this, Register1.class);
-                intent.putExtra("username", username);
-                intent.putExtra("email", email);
-                intent.putExtra("password", password);
-                intent.putExtra("city", city);
-                intent.putExtra("subdistrict", subdistrict);
-                startActivity(intent);
+                if (Utils.isValidEmail(email)) {
+                    Intent intent = new Intent(Register.this, Register1.class);
+                    intent.putExtra("username", username);
+                    intent.putExtra("email", email);
+                    intent.putExtra("password", password);
+                    intent.putExtra("city", city);
+                    intent.putExtra("subdistrict", subdistrict);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(this, getResources().getString(R.string.notice_valid_email), Toast.LENGTH_SHORT).show();
+                }
             } else {
-                Toast.makeText(getApplicationContext(),
-                        "Please enter your details!", Toast.LENGTH_LONG)
-                        .show();
+                Toast.makeText(getApplicationContext(), getResources().getString(R.string.notice_complete_data), Toast.LENGTH_LONG).show();
             }
         });
     }

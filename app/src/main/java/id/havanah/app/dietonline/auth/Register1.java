@@ -5,11 +5,12 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -35,6 +36,7 @@ import id.havanah.app.dietonline.R;
 import id.havanah.app.dietonline.api.ApiService;
 import id.havanah.app.dietonline.app.AppController;
 import id.havanah.app.dietonline.helper.SessionManager;
+import id.havanah.app.dietonline.lib.SmoothCheckBox;
 
 /**
  * Created by farhan at 00:06
@@ -55,7 +57,7 @@ public class Register1 extends AppCompatActivity {
     private Calendar calendar;
     private int day, month, year;
     private SegmentedButtonGroup inputGender;
-    private CheckBox agreement;
+    private SmoothCheckBox agreement;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -74,18 +76,23 @@ public class Register1 extends AppCompatActivity {
             finish();
         });
 
+        TextView linkToTermsAndCond = findViewById(R.id.btn_termsAndConditions);
+        linkToTermsAndCond.setMovementMethod(LinkMovementMethod.getInstance());
+        linkToTermsAndCond.setOnClickListener(v -> {
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW);
+            browserIntent.setData(Uri.parse("http://dion.co.id/docs/Term%20and%20Condition%20DION.pdf"));
+            startActivity(browserIntent);
+        });
+
         calendar = Calendar.getInstance();
 
         inputName = findViewById(R.id.input_name);
         inputNickname = findViewById(R.id.input_nickname);
         inputAddress = findViewById(R.id.input_address);
         inputPhone = findViewById(R.id.input_phone);
-
         inputBirthDay = findViewById(R.id.input_birthday);
         inputBirthDay.setOnClickListener(v -> showDialog(999));
-
         inputGender = findViewById(R.id.input_gender);
-
         agreement = findViewById(R.id.checkbox_agreement);
 
         progressDialog = new ProgressDialog(this);
@@ -176,8 +183,7 @@ public class Register1 extends AppCompatActivity {
                 if (!error) {
                     Toast.makeText(Register1.this, "Successfully registered, congrats!", Toast.LENGTH_SHORT).show();
                     // Launch login activity
-                    Intent intent = new Intent(Register1.this, Login.class);
-                    startActivity(intent);
+                    startActivity(new Intent(Register1.this, Login.class));
                     finish();
                 } else {
 

@@ -4,7 +4,6 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,13 +30,10 @@ import java.util.Map;
 import de.hdodenhof.circleimageview.CircleImageView;
 import id.havanah.app.dietonline.api.ApiService;
 import id.havanah.app.dietonline.app.AppController;
-import id.havanah.app.dietonline.auth.Login;
 import id.havanah.app.dietonline.auth.UpdateAccountInfo;
 import id.havanah.app.dietonline.auth.UpdateMedicalInfo;
 import id.havanah.app.dietonline.auth.UpdatePersonalInfo;
 import id.havanah.app.dietonline.auth.UserData;
-import id.havanah.app.dietonline.helper.SQLiteHandler;
-import id.havanah.app.dietonline.helper.SessionManager;
 
 /**
  * Created by farhan at 19:58
@@ -46,8 +42,6 @@ import id.havanah.app.dietonline.helper.SessionManager;
  */
 public class Profile extends AppCompatActivity implements View.OnClickListener {
 
-    private SessionManager sessionManager;
-    private SQLiteHandler db;
     private UserData userData;
     private float paidAmount, doneAmount;
     private ProgressDialog progressDialog;
@@ -60,8 +54,6 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
         ImageView backButton = findViewById(R.id.home);
         backButton.setOnClickListener(v -> onBackPressed());
 
-        sessionManager = new SessionManager(getApplicationContext());
-        db = new SQLiteHandler(getApplicationContext());
         userData = new UserData();
 
         progressDialog = new ProgressDialog(this);
@@ -106,9 +98,6 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
 
         initUserData();
         initBMIChart();
-
-        Button btnLogout = findViewById(R.id.btn_logout);
-        btnLogout.setOnClickListener(v -> logoutUser());
     }
 
     private void initUserData() {
@@ -136,9 +125,12 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
         } else if (bmi < 27.0) {
             cardBmi.setCardBackgroundColor(getResources().getColor(R.color.overweight));
             tvBmi.setText(getResources().getString(R.string.overweight));
-        } else {
+        } else if (bmi >= 27.0) {
             cardBmi.setCardBackgroundColor(getResources().getColor(R.color.obese));
             tvBmi.setText(getResources().getString(R.string.obese));
+        } else  {
+            cardBmi.setCardBackgroundColor(getResources().getColor(R.color.gray));
+            tvBmi.setText(getResources().getString(R.string.undefined));
         }
 
         TextView userNameHeader = findViewById(R.id.textView_userNameHeader);
@@ -147,7 +139,7 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
         TextView userGenderHeader = findViewById(R.id.textView_userGenderHeader);
         TextView userAgeHeader = findViewById(R.id.textView_userAgeHeader);
         userNameHeader.setText(userData.getName());
-        if (userData.getWeight() == null) {
+        if (userData.getWeight() == null || userData.getWeight().equals("0")) {
             userWeightHeader.setText("?? Kg");
             userHeightHeader.setText("?? Cm");
         } else {
@@ -253,8 +245,8 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
         if (userData.getWeight() == null) {
             userWeight.setText("?? Kg");
             userHeight.setText("?? Cm");
-            userBmi.setText("??");
-            userProhibition.setText("??");
+            userBmi.setText(getResources().getString(R.string.undefined));
+            userProhibition.setText("-");
         } else {
             userWeight.setText(String.format("%s Kg", userData.getWeight()));
             userHeight.setText(String.format("%s Cm", userData.getHeight()));
@@ -267,7 +259,7 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
         GraphView weightGraph = findViewById(R.id.graph_weight);
         weightGraph.setTitle(getResources().getString(R.string.weight));
         LineGraphSeries<DataPoint> series = new LineGraphSeries<>(new DataPoint[]{
-                new DataPoint(0, 60),
+                new DataPoint(0, 0),
                 new DataPoint(1, 57),
                 new DataPoint(2, 54),
                 new DataPoint(3, 50),
@@ -279,14 +271,6 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
         series.setDataPointsRadius(10);
         series.setThickness(8);
         weightGraph.addSeries(series);
-    }
-
-    private void logoutUser() {
-        sessionManager.setLogin(false);
-        db.deleteUsers();
-        Intent intent = new Intent(Profile.this, Login.class);
-        startActivity(intent);
-        finish();
     }
 
     @Override

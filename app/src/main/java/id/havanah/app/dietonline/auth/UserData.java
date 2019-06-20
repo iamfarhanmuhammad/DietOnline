@@ -157,7 +157,7 @@ public class UserData {
         String w = getWeight();
         double height = Double.parseDouble(h) / 100;
         double weight = Double.parseDouble(w);
-        double bmi = weight / (height * height);
+        double bmi = weight / ((height * height));
         return String.format(Locale.US, "%.2f", bmi);
     }
 

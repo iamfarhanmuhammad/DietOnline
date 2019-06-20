@@ -14,6 +14,7 @@ public class ApiService {
     public static String updatePersonal = base_url + "/auth/update_personal.php";
     public static String updateAccount = base_url + "/auth/update_account.php";
     public static String updateMedical = base_url + "/auth/update_medical.php";
+    public static String deleteAccount = base_url+ "/auth/delete_account.php";
     public static String createTransaction = base_url + "/transaction/post.php";
     public static String createTransactionWeightLoss = base_url + "/transaction/post_diet_mayo.php";
     public static String createTransactionSpecialPackage = base_url + "/transaction/post_diet_khusus.php";
@@ -22,5 +23,6 @@ public class ApiService {
     public static String fetchTransactionData = base_url + "/transaction/fetch_data.php";
     public static String fetchTransactionAmount = base_url + "/transaction/fetch_amount.php";
     public static String fetchByInvoice = base_url + "/transaction/fetch_by_invoice.php";
+    public static String updateNote = base_url + "/transaction/update_note.php";
     public static String demo = base_url + "/demo";
 }

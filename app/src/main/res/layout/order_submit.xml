@@ -15,4 +15,5 @@
         <include layout="@layout/order_submit_content" />
 
     </androidx.core.widget.NestedScrollView>
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

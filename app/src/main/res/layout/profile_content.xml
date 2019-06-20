@@ -43,7 +43,7 @@
                             android:fontFamily="@font/open_sans_regular"
                             android:text="70 Kg"
                             android:textColor="@android:color/white"
-                            android:textSize="22sp" />
+                            android:textSize="16sp" />
 
                         <TextView
                             android:id="@+id/textView_userHeightHeader"
@@ -54,7 +54,7 @@
                             android:fontFamily="@font/open_sans_regular"
                             android:text="165 Cm"
                             android:textColor="@android:color/white"
-                            android:textSize="22sp" />
+                            android:textSize="16sp" />
 
                     </FrameLayout>
 
@@ -95,7 +95,7 @@
                 android:text="@string/sample_nickname"
                 android:textAlignment="center"
                 android:textColor="@android:color/black"
-                android:textSize="25sp" />
+                android:textSize="16sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -111,7 +111,7 @@
                     android:text="@string/male"
                     android:textAlignment="center"
                     android:textColor="@android:color/black"
-                    android:textSize="16dp" />
+                    android:textSize="14sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -120,7 +120,7 @@
                     android:text=", "
                     android:textAlignment="center"
                     android:textColor="@android:color/black"
-                    android:textSize="16dp" />
+                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/textView_userAgeHeader"
@@ -130,29 +130,28 @@
                     android:text="@string/sample_age"
                     android:textAlignment="center"
                     android:textColor="@android:color/black"
-                    android:textSize="16dp" />
+                    android:textSize="14sp" />
 
             </LinearLayout>
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardView_bmiIndicator"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="90dp"
+                android:layout_height="20sp"
                 android:layout_gravity="center"
-                android:padding="6dp"
+                android:layout_marginTop="8dp"
                 app:cardBackgroundColor="@color/green"
-                app:cardCornerRadius="8dp">
+                app:cardCornerRadius="4dp">
 
                 <TextView
                     android:id="@+id/textView_bmiIndicator"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="6dp"
-                    android:layout_marginEnd="6dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:fontFamily="@font/nunito_sans_bold"
                     android:text="@string/ideal"
+                    android:textAlignment="center"
                     android:textColor="@android:color/white"
-                    android:textSize="20sp" />
+                    android:textSize="12sp" />
 
             </androidx.cardview.widget.CardView>
 
@@ -183,7 +182,7 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/nunito_sans_bold"
                             android:text="@string/your_package"
-                            android:textSize="16sp" />
+                            android:textSize="14sp" />
 
                         <TextView
                             android:id="@+id/textView_remainingPackage"
@@ -191,7 +190,7 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/nunito_sans_regular"
                             android:text="3 remaining"
-                            android:textSize="14dp" />
+                            android:textSize="12sp" />
 
                     </LinearLayout>
 
@@ -206,7 +205,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="12sp"
-                            android:text="@string/user_active_package" />
+                            android:text="@string/user_active_package"
+                            android:textSize="14sp" />
 
                         <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
                             android:id="@+id/cornerProgressActivePackage"
@@ -241,7 +241,8 @@
                     <com.jjoe64.graphview.GraphView
                         android:id="@+id/graph_weight"
                         android:layout_width="match_parent"
-                        android:layout_height="200dp" />
+                        android:layout_height="200dp"
+                        android:visibility="gone" />
 
                 </LinearLayout>
 
@@ -251,15 +252,27 @@
 
         <include layout="@layout/profile_detail" />
 
-        <Button
-            android:id="@+id/btn_logout"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_margin="20sp"
-            android:background="@color/red"
-            android:text="@string/logout"
-            android:textAllCaps="false"
-            android:textColor="@android:color/white" />
+        <!--<Button-->
+            <!--android:id="@+id/btn_logout"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="40dp"-->
+            <!--android:layout_margin="@dimen/activity_horizontal_margin"-->
+            <!--android:background="@color/red"-->
+            <!--android:text="@string/logout"-->
+            <!--android:textAllCaps="false"-->
+            <!--android:textColor="@android:color/white" />-->
+
+        <!--<Button-->
+            <!--android:id="@+id/btn_delete_account"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="40dp"-->
+            <!--android:layout_marginStart="@dimen/activity_horizontal_margin"-->
+            <!--android:layout_marginEnd="@dimen/activity_horizontal_margin"-->
+            <!--android:layout_marginBottom="@dimen/activity_horizontal_margin"-->
+            <!--android:background="@color/red"-->
+            <!--android:text="@string/delete_account"-->
+            <!--android:textAllCaps="false"-->
+            <!--android:textColor="@android:color/white" />-->
 
     </LinearLayout>
 

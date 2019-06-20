@@ -18,11 +18,11 @@
 
     </com.google.android.material.tabs.TabLayout>
 
-    <androidx.viewpager.widget.ViewPager
+    <id.havanah.app.dietonline.helper.CustomViewPager
         android:id="@+id/viewPager_orderStatus"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    </androidx.viewpager.widget.ViewPager>
+    </id.havanah.app.dietonline.helper.CustomViewPager>
 
 </LinearLayout>

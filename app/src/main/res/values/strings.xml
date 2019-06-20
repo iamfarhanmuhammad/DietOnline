@@ -70,11 +70,12 @@
     <string name="package_daily_description" translatable="false">Layanan Katering Makanan sehat harian (non-diet) yang tidak menggunakan pengawet ataupun penyedap, dan menggunakan bahan makanan segar dan alami, serta mengacu pada pedoman gizi seimbang. Minimal pemesanan 5x pengiriman.</string>
     <string name="package_lunch" translatable="false">Single Lunch Box</string>
     <string name="package_lunch_description" translatable="false">Layanan katering makanan siang sehat yang dapat dikirim ke tempat kerja, sekolah ataupun kampus. Dikemas dalam mika bento sekali pakai. Hanya melayani pengiriman siang dari hari senin-jumat. Tidak menggunakan penyedap maupun pengawet makanan.</string>
-    <string name="package_specific" translatable="false">Katering Khusus</string>
-    <string name="package_specific_description" translatable="false">-</string>
+    <string name="package_specific" translatable="false">Diet Khusus</string>
+    <string name="package_specific_description" translatable="false">Merupakan layanan katering yang bersifat personal sesuai dengan kebutuhan dan kondisi pasien /klien. Katering ini cocok untuk seseorang yang membutuhkan pengaturan makan terkait dengan masalah kesehatan seperti Diabetes Mellitus, Hipertensi, Asam Urat, Gagal ginjal, dll, dan juga untuk pasien yang baru keluar dari RS dan membutuhkan makanan khusus (makanan cair, lunak, dll).</string>
+    <string name="package_specific_description_1" translatable="false">Setelah memesan, seorang ahli gizi akan menghubungi anda melalui aplikasi Whatsapp.</string>
     <string name="package_weight_loss" translatable="false">Weight Loss Diet</string>
-    <string name="package_weight_loss_description" translatable="false">Layanan catering untuk menurunkan berat badan dengan menggunakan konsep Diet Mayo. Dietindo hanya bertindak sebagai penyedia jasa catering diet mayo selama 13 hari dengan ketentuan dan siklus yang berlaku pada diet mayo. Klien harus mematuhi benar terhadap ketentuan diet mayo. Apabila tidak terjadi penurunan berat badan klien seperti yang diharapkan, Dietindo tidak bertanggung jawab atas hal tersebut.</string>
-    <string name="package_weight_loss_description_2" translatable="false">Pengiriman hanya 1x sehari untuk makan siang dan makan malam. Menu Makan pagi disiapkan oleh klien sesuai petunjuk.</string>
+    <string name="package_weight_loss_description" translatable="false">Paket ini ditujukan bagi anda yang menginginkan tubuh ideal dengan menurunkan berat badan. &lt;a href=http://link1/terms> Untuk lebih lengkapnya silahkan membaca panduan berikut.&lt;/a></string>
+    <string name="package_weight_loss_description_1" translatable="false">Pengiriman dilakukan 1x dalam sehari untuk makan siang dan makan malam. Menu pagi disiapkan sendiri oleh klien sesuai petunjuk yang telah tersedia. <b>Pengiriman Diet Mayo akan dimulai setiap hari senin</b>.</string>
     <string name="day">Day</string>
     <string name="day_to_send">Day to Send</string>
     <string name="time_to_send">Time to Send</string>
@@ -170,26 +171,51 @@
     <string name="pay_later">Pay later</string>
     <string name="upload">Upload</string>
     <string name="loading">Loading</string>
+    <string name="cancel">Cancel</string>
+    <string name="notice_edit_note">Enter your new note (specific address or whatever)</string>
+    <string name="successfully_updated">Successfully updated</string>
+    <string name="updating">Updating</string>
+    <string name="edit_note">Edit Note</string>
+    <string name="notice_no_image_chosen">Please choose an image!</string>
+    <string name="package_recommended_desc">See our package recommendation</string>
+    <string name="space" translatable="false" />
+    <string name="undefined">Undefined</string>
+    <string name="notice_activity_level">What is your activity level?</string>
+    <string name="upload_lab_test">Upload Your Lab Test Result</string>
+    <string name="upload_lab_test_desc">Please serve the data which we can use to determine which package is suitable for you.</string>
+    <string name="upload_lab_test_desc_2">Such as blood test completely, blood sugar test, cholesterol or others.</string>
+    <string name="notice_noteless">Please fill the notes</string>
+    <string name="input_note_description">Please fill in the note column, or if it is empty, write it with a strip.</string>
+    <string name="delete_account">Delete Account</string>
+    <string name="account">Account</string>
+    <string name="account_settings">Account Settings</string>
 
-    <string-array name="cities">
-        <item>Malang</item>
-    </string-array>
-    <string-array name="subdistrict">
-        <item>Lowokwaru</item>
-        <item>Dinoyo</item>
-    </string-array>
-    <string-array name="days">
-        <item>Mon</item>
-        <item>Tue</item>
-        <item>Wed</item>
-        <item>Thu</item>
-        <item>Fri</item>
-        <item>Sat</item>
-        <item>Sun</item>
-    </string-array>
-    <string-array name="times">
-        <item>Breakfast</item>
-        <item>Lunch</item>
-        <item>Dinner</item>
-    </string-array>
+    <string name="capture">Capture</string>
+    <string name="camera_not_supported">Your device doesn\'t support camera.</string>
+    <string name="capture_image_failed">Failed to capture image.</string>
+    <string name="permission_message">Both permissions are required. Please allow both permission to take picture.</string>
+    <string name="cancel_message">Cancelled by user.</string>
+    <string name="capture_deny_message">Capture image won\'t work without both permissions.</string>
+    <string name="notice_valid_email">Please enter the valid email!</string>
+    <string name="notice_complete_data">Please entry your data completely!</string>
+    <string name="successfully_deleted">Your account was successfully deleted</string>
+    <string name="error">Error</string>
+    <string name="notice">Notice</string>
+    <string name="update_medical_data">Update medical data</string>
+    <string name="later">Later</string>
+    <string name="notice_medical_data_empty">Please remember that we need your medical data to process the diet data. Click update medical data to be redirected to update medical data form. Or click later to postpone if you don\'t have data yet. And please note that this pop up will be showed as long as your medical data is empty.</string>
+    <string name="notice_weight_loss">Diet Mayo will be started from monday. If you agree the transaction will be proceed, if not it will be cancelled.</string>
+    <string name="disagree">Disagree</string>
+    <string name="agree">Agree</string>
+    <string name="agreement_1">I agree to the</string>
+    <string name="and">and</string>
+    <string name="conditions">conditions</string>
+    <string name="terms">terms</string>
+    <string name="terms_and_conditions">terms and conditions</string>
+    <string name="food_type">Food Type</string>
+    <string name="needs_of_certain_diseases">Needs of certain diseases</string>
+    <string name="notice_incompleted_form">Please complete the form</string>
+    <string name="notice_upload_diagnose">If you click confirm, it means the transaction will be proceed, and you will be redirected to the payment page. If you click cancel it means you cancel the transaction.</string>
+    <string name="privacy_and_policy">Privacy and policy</string>
+    <string name="pending">Pending</string>
 </resources>

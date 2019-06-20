@@ -1,4 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
+    <string-array name="cities">
+        <item>Malang</item>
+    </string-array>
+    <string-array name="subdistrict">
+        <item>Blimbing</item>
+        <item>Klojen</item>
+        <item>Kedungkandang</item>
+        <item>Sukun</item>
+        <item>Lowokwaru</item>
+    </string-array>
+    <string-array name="days">
+        <item>Mon</item>
+        <item>Tue</item>
+        <item>Wed</item>
+        <item>Thu</item>
+        <item>Fri</item>
+        <item>Sat</item>
+        <item>Sun</item>
+    </string-array>
+    <string-array name="times">
+        <item>Breakfast</item>
+        <item>Lunch</item>
+        <item>Dinner</item>
+    </string-array>
+    <string-array name="food_types">
+        <item>Makanan Biasa</item>
+        <item>Makanan Lunak</item>
+        <item>Makanan Cincang</item>
+        <item>Makanan Cair</item>
+        <item>Makanan Sonde</item>
+    </string-array>
+    <string-array name="disease">
+        <item>Diabetes mellitus</item>
+        <item>Hipertensi</item>
+        <item>Asam urat</item>
+        <item>Stroke</item>
+        <item>Jantung</item>
+        <item>Hati</item>
+        <item>Kolestrol</item>
+        <item>Cuci darah</item>
+        <item>Tinggi energi</item>
+        <item>Tinggi protein</item>
+        <item>Tinggi serat</item>
+        <item>Ginjal</item>
+        <item>Rendah energi</item>
+        <item>Rendah protein</item>
+        <item>Rendah serat</item>
+        <item>Kanker</item>
+    </string-array>
 </resources>

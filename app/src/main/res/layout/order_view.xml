@@ -2,6 +2,7 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout_order"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".transaction.Order">
@@ -16,19 +17,23 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <TextView
+            android:id="@+id/textView_orderTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/nunito_sans_bold"
             android:text="@string/order_now"
             android:textAlignment="center"
+            android:textColor="@color/black"
             android:textSize="30sp" />
 
         <TextView
+            android:id="@+id/textView_orderSubtitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/nunito_sans_regular"
             android:text="@string/choose_package"
             android:textAlignment="center"
+            android:textColor="@color/black"
             android:textSize="20sp" />
 
         <androidx.viewpager.widget.ViewPager

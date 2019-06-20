@@ -9,6 +9,9 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.android.volley.Request;
 import com.android.volley.toolbox.StringRequest;
 
@@ -18,14 +21,14 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
+import id.havanah.app.dietonline.Home;
+import id.havanah.app.dietonline.Profile;
 import id.havanah.app.dietonline.R;
 import id.havanah.app.dietonline.api.ApiService;
 import id.havanah.app.dietonline.app.AppController;
 import id.havanah.app.dietonline.helper.SQLiteHandler;
 import id.havanah.app.dietonline.helper.SessionManager;
-import id.havanah.app.dietonline.Profile;
+import id.havanah.app.dietonline.util.Utils;
 
 /**
  * Created by farhan at 23:14
@@ -72,9 +75,13 @@ public class UpdateAccountInfo extends AppCompatActivity {
             String password = inputPassword.getText().toString();
 
             if (!old_username.isEmpty() && !old_email.isEmpty() && !username.isEmpty() && !email.isEmpty() && !password.isEmpty()) {
-                updateUser(old_username, old_email, username, email, password);
+                if (Utils.isValidEmail(email)) {
+                    updateUser(old_username, old_email, username, email, password);
+                } else {
+                    Toast.makeText(this, getResources().getString(R.string.notice_valid_email), Toast.LENGTH_SHORT).show();
+                }
             } else {
-                Toast.makeText(this, "Please entry your details completely!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getResources().getString(R.string.notice_complete_data), Toast.LENGTH_SHORT).show();
             }
 
         });
@@ -102,10 +109,10 @@ public class UpdateAccountInfo extends AppCompatActivity {
                     String email1 = user.getString("email");
                     String updated_at = user.getString("updated_at");
 
-                    Toast.makeText(this, "Successfully updated, congrats!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, getResources().getString(R.string.successfully_updated), Toast.LENGTH_SHORT).show();
 
                     db.updateAccountInfo(username1, email1, updated_at);
-                    Intent intent = new Intent(UpdateAccountInfo.this, Profile.class);
+                    Intent intent = new Intent(UpdateAccountInfo.this, Home.class);
                     startActivity(intent);
                     finish();
                 } else {

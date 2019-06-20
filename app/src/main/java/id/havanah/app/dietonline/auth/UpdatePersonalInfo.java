@@ -32,6 +32,7 @@ import java.util.Map;
 
 import co.ceryle.segmentedbutton.SegmentedButton;
 import co.ceryle.segmentedbutton.SegmentedButtonGroup;
+import id.havanah.app.dietonline.Home;
 import id.havanah.app.dietonline.Profile;
 import id.havanah.app.dietonline.R;
 import id.havanah.app.dietonline.api.ApiService;
@@ -57,8 +58,6 @@ public class UpdatePersonalInfo extends AppCompatActivity {
     private EditText inputAddress;
     private EditText inputPhone;
     private EditText inputBirthDay;
-    private DatePicker datePicker;
-    private Calendar calendar;
     private int day, month, year;
     private String _day, _month, _year;
     private SegmentedButtonGroup inputGender;
@@ -125,9 +124,7 @@ public class UpdatePersonalInfo extends AppCompatActivity {
             if (!name.isEmpty() && !address.isEmpty() && !phone.isEmpty() && !birth_date.isEmpty() && !gender.isEmpty()) {
                 updateUser(username, password, name, nickname, city, subdistrict, address, phone, birth_date, gender);
             } else {
-                Toast.makeText(getApplicationContext(),
-                        "Please enter your details!", Toast.LENGTH_LONG)
-                        .show();
+                Toast.makeText(getApplicationContext(), getResources().getString(R.string.notice_complete_data), Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -195,7 +192,7 @@ public class UpdatePersonalInfo extends AppCompatActivity {
                     db.updatePersonalInfo(name1, nickname1, city1, subdistrict1, address1, phone1, birth_date1, gender1, updated_at);
 
                     // Launch profile activity
-                    Intent intent = new Intent(UpdatePersonalInfo.this, Profile.class);
+                    Intent intent = new Intent(UpdatePersonalInfo.this, Home.class);
                     startActivity(intent);
                     finish();
                 } else {

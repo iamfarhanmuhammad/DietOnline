@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -24,17 +25,18 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
-import id.havanah.app.androidjavautils.Utils;
 import id.havanah.app.dietonline.R;
 import id.havanah.app.dietonline.api.ApiService;
 import id.havanah.app.dietonline.app.AppController;
 import id.havanah.app.dietonline.auth.UserData;
 import id.havanah.app.dietonline.helper.SQLiteHandler;
 import id.havanah.app.dietonline.transaction.OrderSubmit;
+import id.havanah.app.dietonline.util.Utils;
 
 /**
  * Created by farhan at 22:46
@@ -97,9 +99,6 @@ public class DailyPackageForward extends AppCompatActivity {
             toggle.setMarkerColor(getResources().getColor(R.color.colorPrimary));
             multiDays.addView(toggle);
         }
-        multiDays.setOnCheckedChangeListener((group, checkedId, isChecked) -> {
-            Log.v(TAG, "onCheckedStateChanged(): group.getCheckedIds() = " + group.getCheckedIds());
-        });
 
         multiTimes = findViewById(R.id.multiSelectToggleGroup_time);
         String[] timesArray = getResources().getStringArray(R.array.times);
@@ -109,9 +108,6 @@ public class DailyPackageForward extends AppCompatActivity {
             toggle.setMarkerColor(getResources().getColor(R.color.colorPrimary));
             multiTimes.addView(toggle);
         }
-        multiTimes.setOnCheckedChangeListener((group, checkedId, isChecked) -> {
-            Log.v(TAG, "onCheckedStateChanged(): group.getCheckedIds() = " + group.getCheckedIds());
-        });
 
         btnOrder = findViewById(R.id.btn_order);
         btnOrder.setOnClickListener(v -> {
@@ -120,9 +116,23 @@ public class DailyPackageForward extends AppCompatActivity {
             userId = userData.getUid();
 
             Set<Integer> daysCheckedIds = multiDays.getCheckedIds();
-            selectedDays = utils.convertSetIntegerToIntArray(daysCheckedIds);
+            Set<Integer> daysChecked = new HashSet<>(); // Holder for all checked positions
+            for (int id : daysCheckedIds) {
+                View view = multiDays.findViewById(id);
+                int position = multiDays.indexOfChild(view);
+                daysChecked.add(position);
+            }
+
             Set<Integer> timesCheckedIds = multiTimes.getCheckedIds();
-            selectedTimes = utils.convertSetIntegerToIntArray(timesCheckedIds, -7);
+            Set<Integer> timesChecked = new HashSet<>(); // Holder for all checked positions
+            for (int id : timesCheckedIds) {
+                View view = multiTimes.findViewById(id);
+                int position = multiTimes.indexOfChild(view);
+                timesChecked.add(position);
+            }
+
+            selectedDays = utils.convertSetIntegerToIntArray(daysChecked, 1);
+            selectedTimes = utils.convertSetIntegerToIntArray(timesChecked, 1);
 
             String days = utils.convertIntArrayToString(selectedDays);
             String times = utils.convertIntArrayToString(selectedTimes);
@@ -130,7 +140,7 @@ public class DailyPackageForward extends AppCompatActivity {
             if (agreement.isChecked()) {
                 if (orderAmount.isEmpty()) {
                     Toast.makeText(this, getResources().getString(R.string.notice_minimum_amount), Toast.LENGTH_SHORT).show();
-                } else if (daysCheckedIds.isEmpty() || timesCheckedIds.isEmpty()) {
+                } else if (daysChecked.isEmpty() || timesChecked.isEmpty()) {
                     Toast.makeText(this, getResources().getString(R.string.notice_select_days_and_times), Toast.LENGTH_SHORT).show();
                 } else {
                     if (Integer.parseInt(orderAmount) < 5) {
@@ -163,10 +173,13 @@ public class DailyPackageForward extends AppCompatActivity {
                 if (!error) {
                     Toast.makeText(DailyPackageForward.this, getResources().getString(R.string.successfully_create_transaction), Toast.LENGTH_SHORT).show();
                     JSONObject product = jsonObject.getJSONObject("product");
-                    JSONObject transaction = jsonObject.getJSONObject("transactions");
+
+                    JSONArray transactions = jsonObject.getJSONArray("transactions");
+                    JSONObject transaction = transactions.getJSONObject(0);
+
                     // Launch main activity
                     Intent intent = new Intent(DailyPackageForward.this, OrderSubmit.class);
-                    intent.putExtra("amount", jsonObject.getString("amount"));
+                    intent.putExtra("amount", a);
                     intent.putExtra("price", product.getString("price"));
                     intent.putExtra("invoice", transaction.getString("invoice"));
                     startActivity(intent);
@@ -180,7 +193,7 @@ public class DailyPackageForward extends AppCompatActivity {
                 e.printStackTrace();
             }
         }, error -> {
-            Log.e(TAG, "Login Error: " + error.getMessage());
+            Log.e(TAG, "Process error: " + error.getMessage());
             Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
             hideDialog();
         }) {

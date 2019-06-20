@@ -111,7 +111,7 @@ public class Done extends Fragment {
             protected Map<String, String> getParams() {
                 HashMap<String, String> params = new HashMap<>();
                 params.put("user_id", user_id);
-                params.put("status", "3");
+                params.put("status", "4");
                 return params;
             }
         };

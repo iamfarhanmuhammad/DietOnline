@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="@dimen/activity_horizontal_margin"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/nunito_sans_bold"
+        android:text="@string/food_type"
+        android:textSize="24sp" />
+
+    <com.llollox.androidprojects.compoundbuttongroup.CompoundButtonGroup
+        android:id="@+id/input_foodType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:compoundType="radio"
+        app:entries="@array/food_types"
+        app:labelOrder="after"
+        app:numCols="2" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity_horizontal_margin"
+        android:fontFamily="@font/nunito_sans_bold"
+        android:text="@string/needs_of_certain_diseases"
+        android:textSize="24sp" />
+
+    <com.llollox.androidprojects.compoundbuttongroup.CompoundButtonGroup
+        android:id="@+id/input_disease"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:compoundType="check_box"
+        app:entries="@array/disease"
+        app:labelOrder="after"
+        app:numCols="2" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity_horizontal_margin"
+        android:fontFamily="@font/nunito_sans_bold"
+        android:text="@string/note"
+        android:textSize="24sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/nunito_sans_bold"
+        android:text="@string/input_note_description"
+        android:textSize="14sp" />
+
+    <EditText
+        android:id="@+id/input_note"
+        android:layout_width="match_parent"
+        android:layout_height="80sp"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        android:background="@drawable/shape_rectangle_white"
+        android:elevation="2sp"
+        android:inputType="text"
+        android:padding="8sp" />
+
+    <Button
+        android:id="@+id/btn_next"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_gravity="bottom"
+        android:layout_marginTop="@dimen/activity_horizontal_margin"
+        android:background="@color/colorPrimary"
+        android:fontFamily="@font/nunito_sans_bold"
+        android:text="@string/next"
+        android:textAllCaps="false"
+        android:textColor="@color/white" />
+
+</LinearLayout>

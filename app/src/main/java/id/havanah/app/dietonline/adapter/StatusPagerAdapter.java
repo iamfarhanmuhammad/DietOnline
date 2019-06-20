@@ -1,10 +1,8 @@
 package id.havanah.app.dietonline.adapter;
 
 import android.content.Context;
-import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -67,7 +65,7 @@ public class StatusPagerAdapter extends FragmentStatePagerAdapter {
         View view = LayoutInflater.from(context).inflate(R.layout.order_status_tab, null);
         TextView tabTextView = view.findViewById(R.id.textView_tabOrder);
         tabTextView.setText(mFragmentTitleList.get(position));
-        tabTextView.setTextSize(18); // for big text, increase text size
+        tabTextView.setTextSize(16);
         tabTextView.setTextColor(ContextCompat.getColor(context, R.color.white));
         return view;
     }
